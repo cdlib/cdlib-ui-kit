@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>CDLIB UI Library Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <link rel="stylesheet" href="css/main.css" media="all">
+    <style>
+      /***** Demo Styles (not used in production CSS) *****/
+      /* matches selector in WP styles.css: */
+      .alignleft {
+        display: inline;
+        float: left;
+      }
+    </style>
+  </head>
+  <body>
+
+  <div id="app">
+    <div class="t-layout--3">
+  <a href="#maincontent" class="c-skipnav o-button4">Skip to main content</a>
+
+  <header class="c-header" v-onmedia.screen2="detectMediaQuery2">
+  <a class="c-header__logo" href="">
+    <img src="../../ui-assets/images/logo-cdl.svg" alt="California Digital Library logo">
+  </a>
+  <div class="c-header__controls" v-if="!$mq.screen2" v-cloak>
+    <button class="o-button1" v-on:click="headerToggle1" aria-label="search"></button>
+    <button class="o-button3" v-on:click="headerToggle3" aria-label="menu"></button>
+  </div>
+  <transition name="c-header__offscreen">
+    <div class="c-header__search" v-if="isOpen1" v-cloak>
+      <form role="search" action="/" class="c-search">
+  <label class="o-label1" for="c-header-search-field">Search the California Digital Library</label>
+  <input class="o-input1" id="c-header-search-field" type="search" list="c-search-list" name="s" value="" placeholder="">
+  <datalist id="c-search-list">
+    <option value="Handcrafted Rubber Chicken ">
+    <option value="Licensed Concrete Mouse ">
+    <option value="Incredible Frozen Cheese ">
+    <option value="Handmade Cotton Pizza ">
+    <option value="Tasty Concrete Salad ">
+    <option value="Small Metal Bacon ">
+    <option value="Small Granite Fish ">
+    <option value="Refined Wooden Tuna ">
+    <option value="Small Plastic Keyboard ">
+    <option value="Refined Rubber Pants ">
+  </datalist>
+  <button class="o-button4" type="submit">Search</button>
+</form>
+
+      <button class="o-button2" v-on:click="headerToggle2" v-if="!$mq.screen2" aria-label="close search"></button>
+    </div>
+  </transition>
+  <div class="c-header__header-nav" v-if="isOpen2" v-cloak>
+  <nav aria-label="global" class="c-headernav c-mobilenav">
+  <ul>
+    <li class="columns-2">
+<a href="" >About CDL</a>
+
+
+      <ul>
+        <li>
+<a href="" >Handmade Metal Cheese</a>
+
+
+          <ul>
+            <li>
+<a href="" >Handcrafted Granite Sausages</a>
+
+</li>
+            <li>
+<a href="" >Incredible Granite Towels</a>
+
+</li>
+            <li>
+<a href="" >Ergonomic Plastic Mouse</a>
+
+</li>
+            <li>
+<a href="" >Incredible Cotton Ball</a>
+
+</li>
+            <li>
+<a href="" >Generic Wooden Pizza</a>
+
+</li>
+          </ul>
+        </li>
+        <li>
+<a href="" >Handmade Concrete Keyboard</a>
+
+
+          <ul>
+            <li>
+<a href="" >Handcrafted Granite Sausages</a>
+
+</li>
+            <li>
+<a href="" >Incredible Granite Towels</a>
+
+</li>
+            <li>
+<a href="" >Ergonomic Plastic Mouse</a>
+
+</li>
+            <li>
+<a href="" >Incredible Cotton Ball</a>
+
+</li>
+            <li>
+<a href="" >Generic Wooden Pizza</a>
+
+</li>
+          </ul>
+        </li>
+        <li>
+<a href="" >Gorgeous Granite Shirt</a>
+
+
+          <ul>
+            <li>
+<a href="" >Handcrafted Granite Sausages</a>
+
+</li>
+            <li>
+<a href="" >Incredible Granite Towels</a>
+
+</li>
+            <li>
+<a href="" >Ergonomic Plastic Mouse</a>
+
+</li>
+            <li>
+<a href="" >Incredible Cotton Ball</a>
+
+</li>
+            <li>
+<a href="" >Generic Wooden Pizza</a>
+
+</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="columns-3">
+<a href="" >Services &amp; Projects</a>
+
+
+      <ul>
+        <li>
+<a href="" >Handmade Metal Cheese</a>
+
+
+          <ul>
+            <li>
+<a href="" >Handcrafted Granite Sausages</a>
+
+</li>
+            <li>
+<a href="" >Incredible Granite Towels</a>
+
+</li>
+            <li>
+<a href="" >Ergonomic Plastic Mouse</a>
+
+</li>
+            <li>
+<a href="" >Incredible Cotton Ball</a>
+
+</li>
+            <li>
+<a href="" >Generic Wooden Pizza</a>
+
+</li>
+          </ul>
+        </li>
+        <li>
+<a href="" >Handmade Concrete Keyboard</a>
+
+
+          <ul>
+            <li>
+<a href="" >Handcrafted Granite Sausages</a>
+
+</li>
+            <li>
+<a href="" >Incredible Granite Towels</a>
+
+</li>
+            <li>
+<a href="" >Ergonomic Plastic Mouse</a>
+
+</li>
+            <li>
+<a href="" >Incredible Cotton Ball</a>
+
+</li>
+            <li>
+<a href="" >Generic Wooden Pizza</a>
+
+</li>
+          </ul>
+        </li>
+        <li>
+<a href="" >Gorgeous Granite Shirt</a>
+
+
+          <ul>
+            <li>
+<a href="" >Handcrafted Granite Sausages</a>
+
+</li>
+            <li>
+<a href="" >Incredible Granite Towels</a>
+
+</li>
+            <li>
+<a href="" >Ergonomic Plastic Mouse</a>
+
+</li>
+            <li>
+<a href="" >Incredible Cotton Ball</a>
+
+</li>
+            <li>
+<a href="" >Generic Wooden Pizza</a>
+
+</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="">
+<a href="" >Resources for...</a>
+
+
+      <ul>
+        <li>
+<a href="" >Handmade Metal Cheese</a>
+
+
+          <ul>
+            <li>
+<a href="" >Handcrafted Granite Sausages</a>
+
+</li>
+            <li>
+<a href="" >Incredible Granite Towels</a>
+
+</li>
+            <li>
+<a href="" >Ergonomic Plastic Mouse</a>
+
+</li>
+            <li>
+<a href="" >Incredible Cotton Ball</a>
+
+</li>
+            <li>
+<a href="" >Generic Wooden Pizza</a>
+
+</li>
+          </ul>
+        </li>
+        <li>
+<a href="" >Handmade Concrete Keyboard</a>
+
+
+          <ul>
+            <li>
+<a href="" >Handcrafted Granite Sausages</a>
+
+</li>
+            <li>
+<a href="" >Incredible Granite Towels</a>
+
+</li>
+            <li>
+<a href="" >Ergonomic Plastic Mouse</a>
+
+</li>
+            <li>
+<a href="" >Incredible Cotton Ball</a>
+
+</li>
+            <li>
+<a href="" >Generic Wooden Pizza</a>
+
+</li>
+          </ul>
+        </li>
+        <li>
+<a href="" >Gorgeous Granite Shirt</a>
+
+
+          <ul>
+            <li>
+<a href="" >Handcrafted Granite Sausages</a>
+
+</li>
+            <li>
+<a href="" >Incredible Granite Towels</a>
+
+</li>
+            <li>
+<a href="" >Ergonomic Plastic Mouse</a>
+
+</li>
+            <li>
+<a href="" >Incredible Cotton Ball</a>
+
+</li>
+            <li>
+<a href="" >Generic Wooden Pizza</a>
+
+</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="">
+<a href="" >Committees &amp; Groups</a>
+
+
+      <ul>
+        <li>
+<a href="" >Handmade Metal Cheese</a>
+
+
+          <ul>
+            <li>
+<a href="" >Handcrafted Granite Sausages</a>
+
+</li>
+            <li>
+<a href="" >Incredible Granite Towels</a>
+
+</li>
+            <li>
+<a href="" >Ergonomic Plastic Mouse</a>
+
+</li>
+            <li>
+<a href="" >Incredible Cotton Ball</a>
+
+</li>
+            <li>
+<a href="" >Generic Wooden Pizza</a>
+
+</li>
+          </ul>
+        </li>
+        <li>
+<a href="" >Handmade Concrete Keyboard</a>
+
+
+          <ul>
+            <li>
+<a href="" >Handcrafted Granite Sausages</a>
+
+</li>
+            <li>
+<a href="" >Incredible Granite Towels</a>
+
+</li>
+            <li>
+<a href="" >Ergonomic Plastic Mouse</a>
+
+</li>
+            <li>
+<a href="" >Incredible Cotton Ball</a>
+
+</li>
+            <li>
+<a href="" >Generic Wooden Pizza</a>
+
+</li>
+          </ul>
+        </li>
+        <li>
+<a href="" >Gorgeous Granite Shirt</a>
+
+
+          <ul>
+            <li>
+<a href="" >Handcrafted Granite Sausages</a>
+
+</li>
+            <li>
+<a href="" >Incredible Granite Towels</a>
+
+</li>
+            <li>
+<a href="" >Ergonomic Plastic Mouse</a>
+
+</li>
+            <li>
+<a href="" >Incredible Cotton Ball</a>
+
+</li>
+            <li>
+<a href="" >Generic Wooden Pizza</a>
+
+</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="">
+<a href="" >News &amp; Groups</a>
+
+
+      <ul>
+        <li>
+<a href="" >Handmade Metal Cheese</a>
+
+
+          <ul>
+            <li>
+<a href="" >Handcrafted Granite Sausages</a>
+
+</li>
+            <li>
+<a href="" >Incredible Granite Towels</a>
+
+</li>
+            <li>
+<a href="" >Ergonomic Plastic Mouse</a>
+
+</li>
+            <li>
+<a href="" >Incredible Cotton Ball</a>
+
+</li>
+            <li>
+<a href="" >Generic Wooden Pizza</a>
+
+</li>
+          </ul>
+        </li>
+        <li>
+<a href="" >Handmade Concrete Keyboard</a>
+
+
+          <ul>
+            <li>
+<a href="" >Handcrafted Granite Sausages</a>
+
+</li>
+            <li>
+<a href="" >Incredible Granite Towels</a>
+
+</li>
+            <li>
+<a href="" >Ergonomic Plastic Mouse</a>
+
+</li>
+            <li>
+<a href="" >Incredible Cotton Ball</a>
+
+</li>
+            <li>
+<a href="" >Generic Wooden Pizza</a>
+
+</li>
+          </ul>
+        </li>
+        <li>
+<a href="" >Gorgeous Granite Shirt</a>
+
+
+          <ul>
+            <li>
+<a href="" >Handcrafted Granite Sausages</a>
+
+</li>
+            <li>
+<a href="" >Incredible Granite Towels</a>
+
+</li>
+            <li>
+<a href="" >Ergonomic Plastic Mouse</a>
+
+</li>
+            <li>
+<a href="" >Incredible Cotton Ball</a>
+
+</li>
+            <li>
+<a href="" >Generic Wooden Pizza</a>
+
+</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+  </div>
+  <div class="c-header__utility-nav" v-if="isOpen2" v-cloak>
+    <nav aria-label="top" class="c-utilitynav c-mobilenav">
+  <ul>
+    <li>
+      
+      <a href="" >Staff Directory</a>
+      
+    </li>
+    <li>
+      
+      <a href="" >Contact CDL</a>
+      
+    </li>
+    <li>
+      
+      <a href="" >Report a Problem</a>
+      
+    </li>
+    <li>
+      
+      <a href="" >System Status</a>
+      
+    </li>
+  </ul>
+</nav>
+
+  </div>
+</header>
+
+  <nav aria-label="breadcrumb" class="c-breadcrumb">
+  <ul>
+    <li>
+<a href="" >Ergonomic Steel Chips</a>
+
+</li>
+    <li>
+<a href="" >Gorgeous Soft Fish</a>
+
+</li>
+    <li>This Page Title</li>
+  </ul>
+</nav>
+
+  <aside aria-label="first" class="t-layout__sidebar1">
+    <nav aria-labelledby="secondarynav-heading" class="c-secondarynav o-sidebarnav" v-onmedia.screen2="detectMediaQuery">
+  <header>
+    <h2 id="secondarynav-heading">
+        
+        <a href="" >Refined Rubber Shirt</a>
+        
+    </h2>
+    <template v-if="!$mq.screen2">
+      <button aria-label="close navigation menu" aria-expanded="true" class="o-button5" v-on:click="toggle1" v-if="isDisplayed">Close Menu</button>
+      <button aria-label="open navigation menu" aria-expanded="false" class="o-button6" v-on:click="toggle1" v-if="!isDisplayed">Open Menu</button>
+    </template>
+  </header>
+  <div v-if="isDisplayed" v-cloak>
+    <ul>
+      <li>
+<a href="" >Refined Rubber Shirt</a>
+
+
+        <ul>
+          <li>
+<a href="" >Unbranded Frozen Chair</a>
+
+</li>
+          <li>
+<a href="" >Practical Plastic Table</a>
+
+</li>
+          <li>
+<a href="" >Licensed Plastic Hat</a>
+
+</li>
+          <li>
+<a href="" >Refined Rubber Shirt</a>
+
+
+            <ul>
+              <li>
+<a href="" >Ergonomic Wooden Soap</a>
+
+</li>
+              <li>
+<a href="" >Licensed Wooden Towels</a>
+
+</li>
+              <li>
+<a href="" >Practical Metal Mouse</a>
+
+</li>
+              <li>
+<a href="" >Refined Rubber Shirt</a>
+
+
+                <ul>
+                  <li>
+<a href="https://sp.ucop.edu/document.html" >Fantastic Metal Mouse</a>
+
+</li>
+                  <li>
+<a href="https://sp.ucop.edu/document.html" >Intelligent Concrete Tuna</a>
+
+</li>
+                  <li>
+<a href="https://sp.ucop.edu/document.html" >Gorgeous Cotton Car</a>
+
+</li>
+                  <li>
+<a href="" >Refined Rubber Shirt</a>
+
+
+                    <ul>
+                      <li>
+<a href="" >Intelligent Cotton Bike</a>
+
+</li>
+                      <li>
+<a href="" >Awesome Plastic Chicken</a>
+
+</li>
+                      <li>
+<a href="" >Unbranded Metal Chair</a>
+
+</li>
+                      <li class="current_page_item">
+<a href="" >Refined Rubber Shirt</a>
+
+
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+  </aside>
+  <main id="maincontent">
+    <h1 >
+        Program Name 
+    </h1>
+      <p>Molestias rerum explicabo et aperiam ipsa vero. Placeat eaque distinctio voluptate aut ad voluptas qui quidem. Molestiae incidunt inventore quod modi fuga quasi eum. Rem vel nesciunt et quia assumenda at magnam esse ut. Beatae qui quo et sed.</p>
+      <p>Veniam repellendus doloribus consectetur deserunt rerum aperiam inventore labore. Ipsam ipsa accusamus laudantium. Esse quia at perspiciatis similique laboriosam nesciunt dolorem cumque est.</p>
+    <section class="c-mainbox">
+  <header><h2 >
+    Main Box Heading 
+</h2>
+</header>
+  <p>Aperiam voluptatem vel sint illo maxime libero quia. Sed unde id neque itaque vero id delectus. Quae ex sint enim. Dolorem qui ipsam. Deleniti omnis perspiciatis veniam accusantium reprehenderit quidem eum sit. Accusantium odio dicta aut.</p>
+  <p>Numquam quos odio illo nemo excepturi. Exercitationem aliquam veritatis quos. Sunt aliquam saepe expedita aut commodi eos qui. Accusamus inventore voluptatem accusantium delectus facilis tempora. Optio quia natus voluptatibus.</p>
+  <p>Aut dignissimos dolorum porro libero sunt autem error. Voluptas nulla et impedit voluptatem delectus soluta deleniti sint ut. Officiis dolore eius. Cupiditate nihil accusantium. Impedit quis ullam sapiente veritatis amet laudantium. Tempore blanditiis eos et quibusdam omnis magni et.</p>
+</section>
+
+    <section class="c-mainbox">
+  <header><h2 >
+    Main Box Heading 
+</h2>
+</header>
+  <h3 >
+      
+      <a href="" >Handcrafted Steel Bacon</a>
+      
+  </h3>
+  <p>Aperiam voluptatem vel sint illo maxime libero quia. Sed unde id neque itaque vero id delectus. Quae ex sint enim. Dolorem qui ipsam. Deleniti omnis perspiciatis veniam accusantium reprehenderit quidem eum sit. Accusantium odio dicta aut.</p>
+  <h3 >
+      
+      <a href="" >Ergonomic Cotton Soap</a>
+      
+  </h3>
+  <p>Numquam quos odio illo nemo excepturi. Exercitationem aliquam veritatis quos. Sunt aliquam saepe expedita aut commodi eos qui. Accusamus inventore voluptatem accusantium delectus facilis tempora. Optio quia natus voluptatibus.</p>
+  <h3 >
+      
+      <a href="" >Intelligent Metal Chair</a>
+      
+  </h3>
+  <p>Aut dignissimos dolorum porro libero sunt autem error. Voluptas nulla et impedit voluptatem delectus soluta deleniti sint ut. Officiis dolore eius. Cupiditate nihil accusantium. Impedit quis ullam sapiente veritatis amet laudantium. Tempore blanditiis eos et quibusdam omnis magni et.</p>
+</section>
+
+    <section class="c-mainbox">
+  <header><h2 >
+    Main Box Heading 
+</h2>
+</header>
+  <h3 >
+      
+      <a href="" >Handcrafted Steel Bacon</a>
+      
+  </h3>
+  <p>Aperiam voluptatem vel sint illo maxime libero quia. Sed unde id neque itaque vero id delectus. Quae ex sint enim. Dolorem qui ipsam. Deleniti omnis perspiciatis veniam accusantium reprehenderit quidem eum sit. Accusantium odio dicta aut.</p>
+  <h3 >
+      
+      <a href="" >Ergonomic Cotton Soap</a>
+      
+  </h3>
+  <p>Numquam quos odio illo nemo excepturi. Exercitationem aliquam veritatis quos. Sunt aliquam saepe expedita aut commodi eos qui. Accusamus inventore voluptatem accusantium delectus facilis tempora. Optio quia natus voluptatibus.</p>
+  <h3 >
+      
+      <a href="" >Intelligent Metal Chair</a>
+      
+  </h3>
+  <p>Aut dignissimos dolorum porro libero sunt autem error. Voluptas nulla et impedit voluptatem delectus soluta deleniti sint ut. Officiis dolore eius. Cupiditate nihil accusantium. Impedit quis ullam sapiente veritatis amet laudantium. Tempore blanditiis eos et quibusdam omnis magni et.</p>
+</section>
+
+      <p>Molestias rerum explicabo et aperiam ipsa vero. Placeat eaque distinctio voluptate aut ad voluptas qui quidem. Molestiae incidunt inventore quod modi fuga quasi eum. Rem vel nesciunt et quia assumenda at magnam esse ut. Beatae qui quo et sed.</p>
+      <p>Veniam repellendus doloribus consectetur deserunt rerum aperiam inventore labore. Ipsam ipsa accusamus laudantium. Esse quia at perspiciatis similique laboriosam nesciunt dolorem cumque est.</p>
+    <div class="c-halfboxes">
+  <section class="c-mainbox">
+  <header><h2 >
+    Main Box Heading 
+</h2>
+</header>
+  <p>Aperiam voluptatem vel sint illo maxime libero quia. Sed unde id neque itaque vero id delectus. Quae ex sint enim. Dolorem qui ipsam. Deleniti omnis perspiciatis veniam accusantium reprehenderit quidem eum sit. Accusantium odio dicta aut.</p>
+  <p>Numquam quos odio illo nemo excepturi. Exercitationem aliquam veritatis quos. Sunt aliquam saepe expedita aut commodi eos qui. Accusamus inventore voluptatem accusantium delectus facilis tempora. Optio quia natus voluptatibus.</p>
+  <p>Aut dignissimos dolorum porro libero sunt autem error. Voluptas nulla et impedit voluptatem delectus soluta deleniti sint ut. Officiis dolore eius. Cupiditate nihil accusantium. Impedit quis ullam sapiente veritatis amet laudantium. Tempore blanditiis eos et quibusdam omnis magni et.</p>
+</section>
+
+  <section class="c-mainbox">
+  <header><h2 >
+    Main Box Heading 
+</h2>
+</header>
+  <h3 >
+      
+      <a href="" >Handcrafted Steel Bacon</a>
+      
+  </h3>
+  <p>Aperiam voluptatem vel sint illo maxime libero quia. Sed unde id neque itaque vero id delectus. Quae ex sint enim. Dolorem qui ipsam. Deleniti omnis perspiciatis veniam accusantium reprehenderit quidem eum sit. Accusantium odio dicta aut.</p>
+  <h3 >
+      
+      <a href="" >Ergonomic Cotton Soap</a>
+      
+  </h3>
+  <p>Numquam quos odio illo nemo excepturi. Exercitationem aliquam veritatis quos. Sunt aliquam saepe expedita aut commodi eos qui. Accusamus inventore voluptatem accusantium delectus facilis tempora. Optio quia natus voluptatibus.</p>
+  <h3 >
+      
+      <a href="" >Intelligent Metal Chair</a>
+      
+  </h3>
+  <p>Aut dignissimos dolorum porro libero sunt autem error. Voluptas nulla et impedit voluptatem delectus soluta deleniti sint ut. Officiis dolore eius. Cupiditate nihil accusantium. Impedit quis ullam sapiente veritatis amet laudantium. Tempore blanditiis eos et quibusdam omnis magni et.</p>
+</section>
+
+</div>
+
+    <table class="c-staff">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Title</th>
+      <th>Program</th>
+      <th>Contact</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Muller, Daphne</th>
+      <td>Regional Tactics Consultant</td>
+      <td>Infrastructure and Applications Support</td>
+      <td>
+        <a href="">
+          <span>View profile</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Lockman, Arlie</th>
+      <td>National Web Technician</td>
+      <td>Infrastructure and Applications Support</td>
+      <td>
+        <a href="">
+          <span>View profile</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Morissette, Katrine</th>
+      <td>Legacy Interactions Strategist</td>
+      <td>UC Curation Center (UC3)</td>
+      <td>
+        <a href="">
+          <span>View profile</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Hauck, Mervin</th>
+      <td>District Intranet Coordinator</td>
+      <td>Discovery &amp; Delivery</td>
+      <td>
+        <a href="">
+          <span>View profile</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Hudson, Trystan</th>
+      <td>Chief Markets Assistant</td>
+      <td>Shared Cataloging Program (UC San Diego)</td>
+      <td>
+        <a href="">
+          <span>View profile</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Hirthe, Retta</th>
+      <td>Legacy Mobility Agent</td>
+      <td>Collection Development &amp; Management - Mass Digitization</td>
+      <td>
+        <a href="">
+          <span>View profile</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Oberbrunner, Immanuel</th>
+      <td>Chief Integration Representative</td>
+      <td>Collection Development &amp; Management - Mass Digitization</td>
+      <td>
+        <a href="">
+          <span>View profile</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Glover, Miguel</th>
+      <td>Central Identity Planner</td>
+      <td>Collection Development &amp; Management - Mass Digitization</td>
+      <td>
+        <a href="">
+          <span>View profile</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Shields, Kathleen</th>
+      <td>Global Tactics Technician</td>
+      <td>Shared Cataloging Program (UC San Diego)</td>
+      <td>
+        <a href="">
+          <span>View profile</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Block, Tiffany</th>
+      <td>Principal Integration Manager</td>
+      <td>UC Curation Center (UC3)</td>
+      <td>
+        <a href="">
+          <span>View profile</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Wyman, Deonte</th>
+      <td>Corporate Identity Analyst</td>
+      <td>Infrastructure and Applications Support</td>
+      <td>
+        <a href="">
+          <span>View profile</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Treutel, Piper</th>
+      <td>Dynamic Branding Executive</td>
+      <td>Discovery &amp; Delivery</td>
+      <td>
+        <a href="">
+          <span>View profile</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">McKenzie, Beatrice</th>
+      <td>National Markets Associate</td>
+      <td>Infrastructure and Applications Support</td>
+      <td>
+        <a href="">
+          <span>View profile</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Daugherty, Vallie</th>
+      <td>Dynamic Integration Technician</td>
+      <td>Business Services</td>
+      <td>
+        <a href="">
+          <span>View profile</span>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Kunze, Irma</th>
+      <td>Principal Creative Associate</td>
+      <td>Collection Development &amp; Management - Mass Digitization</td>
+      <td>
+        <a href="">
+          <span>View profile</span>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+  </main>
+  <aside aria-label="second" class="t-layout__sidebar2">
+    <section class="c-news o-sidebarbox">
+  <header>
+    <h2>
+        Latest News
+    </h2>
+  </header>
+  <ul>
+    <li>
+<a href="http://ludwig.com" >Et accusamus ipsa consequatur recusandae nam qui et sed sit</a>
+
+</li>
+    <li>
+<a href="http://audrey.biz" >Explicabo vitae ut</a>
+
+</li>
+    <li>
+<a href="http://alden.org" >Voluptatem eligendi numquam corrupti hic consequatur</a>
+
+</li>
+    <li>
+<a href="" >More...</a>
+
+</li>
+  </ul>
+</section>
+
+    <section class="o-sidebarbox">
+  <header><h2>
+    Sidebar Box Heading
+</h2>
+</header>
+  <ul>
+    <li>
+<a href="https://frieda.net" data-wpel-link="external">Cum et et repudiandae maxime</a>
+
+</li>
+    <li>
+<a href="http://jaiden.biz" >Omnis autem odio repellat itaque inventore reiciendis aut quia</a>
+
+</li>
+    <li>
+<a href="http://olen.net" data-wpel-link="external">Vero delectus ut alias vitae</a>
+
+</li>
+    <li>
+<a href="http://clovis.com" >Modi cupiditate qui</a>
+
+</li>
+    <li>
+<a href="https://kadin.com" >Ad rerum aut qui laboriosam quibusdam ratione</a>
+
+</li>
+  </ul>
+</section>
+
+    <section class="o-sidebarbox">
+  <header><h2>
+    Sidebar Box Heading
+</h2>
+</header>
+  <ul>
+    <li>
+<a href="https://frieda.net" data-wpel-link="external">Cum et et repudiandae maxime</a>
+
+</li>
+    <li>
+<a href="http://jaiden.biz" >Omnis autem odio repellat itaque inventore reiciendis aut quia</a>
+
+</li>
+    <li>
+<a href="http://olen.net" data-wpel-link="external">Vero delectus ut alias vitae</a>
+
+</li>
+    <li>
+<a href="http://clovis.com" >Modi cupiditate qui</a>
+
+</li>
+    <li>
+<a href="https://kadin.com" >Ad rerum aut qui laboriosam quibusdam ratione</a>
+
+</li>
+  </ul>
+</section>
+
+    <section class="o-sidebarbox">
+  <header><h2>
+    Sidebar Box Heading
+</h2>
+</header>
+  Vel dolores officiis quas explicabo. Facilis accusamus voluptates est nisi. Inventore iure voluptatem vitae quos perferendis et molestiae consectetur. Cumque illum voluptatem officiis laborum. Aperiam ullam magnam quasi ut doloribus et occaecati.
+</section>
+
+  </aside>
+  <aside aria-label="last updated by page owner" class="c-updated">
+  <div id="updated-last" class="c-updated__label">Last updated:</div>
+  <time aria-labelledby="updated-last">February 27, 2018</time>
+  <div id="updated-owner" class="c-updated__label" aria-label="page owner">Page owner:</div>
+  <address aria-labelledby="updated-owner">
+    
+    <a href="mailto:Aimee.Lucie@ucop.edu" >Lucie Aimee</a>
+    
+  </address>
+</aside>
+
+  <footer class="c-footer">
+  <nav class="c-footer__main" aria-label="footer">
+    <ul>
+      <li>
+<a href="" >About CDL</a>
+
+
+        <ul>
+          <li>
+<a href="" >Voluptas provident est</a>
+
+</li>
+          <li>
+<a href="" >Quasi dolorem omnis</a>
+
+</li>
+          <li>
+<a href="" >Consequatur quia beatae</a>
+
+</li>
+          <li>
+<a href="" >Qui laudantium sint</a>
+
+</li>
+          <li>
+<a href="" >Dolorum voluptas consequatur</a>
+
+</li>
+        </ul>
+      </li>
+      <li>
+<a href="" >Our Organization</a>
+
+
+        <ul>
+          <li>
+<a href="" >Voluptas provident est</a>
+
+</li>
+          <li>
+<a href="" >Quasi dolorem omnis</a>
+
+</li>
+          <li>
+<a href="" >Consequatur quia beatae</a>
+
+</li>
+          <li>
+<a href="" >Qui laudantium sint</a>
+
+</li>
+          <li>
+<a href="" >Dolorum voluptas consequatur</a>
+
+</li>
+        </ul>
+      </li>
+      <li>
+<a href="" >Services &amp; Projects</a>
+
+
+        <ul>
+          <li>
+<a href="" >Voluptas provident est</a>
+
+</li>
+          <li>
+<a href="" >Quasi dolorem omnis</a>
+
+</li>
+          <li>
+<a href="" >Consequatur quia beatae</a>
+
+</li>
+          <li>
+<a href="" >Qui laudantium sint</a>
+
+</li>
+          <li>
+<a href="" >Dolorum voluptas consequatur</a>
+
+</li>
+        </ul>
+      </li>
+      <li>
+<a href="" >Resources For...</a>
+
+
+        <ul>
+          <li>
+<a href="" >Voluptas provident est</a>
+
+</li>
+          <li>
+<a href="" >Quasi dolorem omnis</a>
+
+</li>
+          <li>
+<a href="" >Consequatur quia beatae</a>
+
+</li>
+          <li>
+<a href="" >Qui laudantium sint</a>
+
+</li>
+          <li>
+<a href="" >Dolorum voluptas consequatur</a>
+
+</li>
+        </ul>
+      </li>
+      <li>
+<a href="" >Committees &amp; Groups</a>
+
+
+        <ul>
+          <li>
+<a href="" >Voluptas provident est</a>
+
+</li>
+          <li>
+<a href="" >Quasi dolorem omnis</a>
+
+</li>
+          <li>
+<a href="" >Consequatur quia beatae</a>
+
+</li>
+          <li>
+<a href="" >Qui laudantium sint</a>
+
+</li>
+          <li>
+<a href="" >Dolorum voluptas consequatur</a>
+
+</li>
+        </ul>
+      </li>
+      <li>
+<a href="" >News &amp; Media</a>
+
+
+        <ul>
+          <li>
+<a href="" >Voluptas provident est</a>
+
+</li>
+          <li>
+<a href="" >Quasi dolorem omnis</a>
+
+</li>
+          <li>
+<a href="" >Consequatur quia beatae</a>
+
+</li>
+          <li>
+<a href="" >Qui laudantium sint</a>
+
+</li>
+          <li>
+<a href="" >Dolorum voluptas consequatur</a>
+
+</li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  <div class="c-footer__legal">
+    <ul>
+      <li>
+<a href="" >Site Map</a>
+
+</li>
+      <li>
+<a href="" >Terms &amp; Conditions</a>
+
+</li>
+      <li>
+<a href="" >Privacy Policy</a>
+
+</li>
+      <li>
+<a href="" >Accessibility Policy</a>
+
+</li>
+    </ul>
+  </div>
+  <div class="c-footer__copyright">
+    <small>Copyright © 2018 The Regents of The University of California</small>
+    <small>California Digital Library</small>
+  </div>
+</footer>
+
+</div>
+
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/core-js@2.6.1/client/core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.15/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-match-media@1.0.2/dist/index.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/details-element-polyfill@2.0.3/dist/details-element-polyfill.min.js"></script>
+  <script src="../../ui-assets/js/main.js"></script>
+
+ </body>
+</html>

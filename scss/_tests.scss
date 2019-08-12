@@ -1,0 +1,63 @@
+// ***** Fractal and Gulp Toolkit Tests ***** //
+
+code {
+  color: $color-darkred;
+}
+
+.test-sass {
+  color: $color-green;
+}
+
+.test-sass-lint {
+  cursor: pointer;
+  display: block;
+}
+
+.test-icon {
+  display: inline;
+  padding-right: 1.5em;
+  background-image: url('check-solid.svg' param(--color #{$color-green}));
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 1em;
+}
+
+.test-autoprefixer-basic {
+  user-select: auto;
+}
+
+.test-autoprefixer-grid {
+  display: grid;
+  grid-gap: 5px;
+  grid-template:
+    'header header'
+    'cell1 cell2'
+    'cell3 cell4'
+    / 1fr 1fr;
+
+  > * {
+    padding: 5px;
+    background-color: $color-gray;
+  }
+
+  .test-grid-header {
+    grid-area: header;
+  }
+
+  .test-grid-1 {
+    grid-area: cell1;
+  }
+
+  .test-grid-2 {
+    grid-area: cell2;
+  }
+
+  .test-grid-3 {
+    grid-area: cell3;
+  }
+
+  .test-grid-4 {
+    grid-area: cell4;
+  }
+
+}
