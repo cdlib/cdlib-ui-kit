@@ -1,10 +1,12 @@
 const del = require('del');
 const { src, dest, watch, series, parallel } = require('gulp');
 const minifyCSS = require('gulp-clean-css');
+const eslint = require('gulp-eslint');
 const postcss = require('gulp-postcss');
 const sass = require('gulp-sass');
 const sassJson = require('gulp-sass-json');
 const sassLint = require('gulp-sass-lint');
+const uglify = require('gulp-uglify');
 const fractal = require('./fractal.js');
 const { exec } = require('child_process');
 
@@ -12,7 +14,7 @@ const { exec } = require('child_process');
 
 exports.default = parallel(sassbuild, fractalstart, watcher);
 
-exports.build = series(clean, sassbuild, fractalbuild, pushassetslocal);
+exports.build = series(clean, sassbuild, scsslint, jsbuild, fractalbuild, pushassetslocal);
 
 exports.deploy = series(clean, sassbuild, fractalbuild, pushassetslocal, uploadlibrary);
 
@@ -55,6 +57,7 @@ function clean(cb) {
 
 function watcher(cb) {
   watch('./scss/*.scss', parallel(sasswatch, scsslint));
+  watch('./js/*.js', jswatch);
   cb();
 }
 
@@ -89,6 +92,21 @@ function scsslint(cb) {
   .pipe(sassLint.format())
   .pipe(sassLint.failOnError())
   cb();
+}
+
+function jswatch(cb) {
+  return src('./js/*.js', { sourcemaps: true })
+  .pipe(eslint())
+  .pipe(eslint.format())
+  .pipe(dest('./ui-assets/js', { sourcemaps: true }));
+}
+
+function jsbuild(cb) {
+  return src(['./js/*.js'])
+  .pipe(eslint())
+  .pipe(eslint.format())
+  .pipe(uglify())
+  .pipe(dest('./ui-assets/js'));
 }
 
 // Rsync Tasks:

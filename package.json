@@ -21,13 +21,21 @@
     "@frctl/mandelbrot": "^1.2.1",
     "autoprefixer": "^9.6.1",
     "del": "^5.0.0",
+    "eslint-config-standard": "^14.0.1",
+    "eslint-plugin-compat": "^3.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
     "faker": "^4.1.0",
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.2.0",
+    "gulp-eslint": "^6.0.0",
     "gulp-postcss": "^8.0.0",
     "gulp-sass": "^4.0.2",
     "gulp-sass-json": "^1.0.1",
     "gulp-sass-lint": "^1.4.0",
+    "gulp-uglify": "^3.0.2",
     "modern-normalize": "^0.5.0",
     "postcss-import": "^12.0.1",
     "postcss-svg": "^3.0.0"
@@ -35,5 +43,17 @@
   "browserslist": [
     "> 1% in my stats"
   ],
+  "eslintConfig": {
+    "extends": [
+      "plugin:compat/recommended",
+      "standard"
+    ],
+    "globals": {
+      "Vue": "readonly"
+    },
+    "env": {
+      "browser": true
+    }
+  },
   "dependencies": {}
 }
