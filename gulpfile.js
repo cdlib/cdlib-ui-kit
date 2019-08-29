@@ -1,3 +1,4 @@
+const babel = require('gulp-babel');
 const del = require('del');
 const { src, dest, watch, series, parallel } = require('gulp');
 const minifyCSS = require('gulp-clean-css');
@@ -12,9 +13,9 @@ const { exec } = require('child_process');
 
 // Public Tasks:
 
-exports.default = parallel(sassbuild, fractalstart, watcher);
+exports.default = parallel(sasswatch, jswatch, fractalstart, watcher);
 
-exports.build = series(clean, sassbuild, scsslint, jsbuild, fractalbuild, pushassetslocal);
+exports.build = series(clean, sassbuild, scsslint, jslint, jsbuild, fractalbuild, pushassetslocal);
 
 exports.deploy = series(clean, sassbuild, fractalbuild, pushassetslocal, uploadlibrary);
 
@@ -57,7 +58,7 @@ function clean(cb) {
 
 function watcher(cb) {
   watch('./scss/*.scss', parallel(sasswatch, scsslint));
-  watch('./js/*.js', jswatch);
+  watch('./js/*.js', parallel(jswatch, jslint));
   cb();
 }
 
@@ -94,19 +95,30 @@ function scsslint(cb) {
   cb();
 }
 
-function jswatch(cb) {
-  return src('./js/*.js', { sourcemaps: true })
+function jslint(cb) {
+  return src(['./js/*.js'])
   .pipe(eslint())
   .pipe(eslint.format())
-  .pipe(dest('./ui-assets/js', { sourcemaps: true }));
+  cb();
+}
+
+function jswatch(cb) {
+  return src('./js/*.js', { sourcemaps: true })
+  .pipe(babel({
+    presets: ['@babel/env']
+  }))
+  .pipe(dest('./ui-assets/js', { sourcemaps: true }))
+  cb();
 }
 
 function jsbuild(cb) {
   return src(['./js/*.js'])
-  .pipe(eslint())
-  .pipe(eslint.format())
+  .pipe(babel({
+    presets: ['@babel/env']
+  }))
   .pipe(uglify())
-  .pipe(dest('./ui-assets/js'));
+  .pipe(dest('./ui-assets/js'))
+  cb();
 }
 
 // Rsync Tasks:
