@@ -6,7 +6,6 @@ const concat = require('gulp-concat');
 const eslint = require('gulp-eslint');
 const postcss = require('gulp-postcss');
 const sass = require('gulp-sass');
-const sassJson = require('gulp-sass-json');
 const sassLint = require('gulp-sass-lint');
 const uglify = require('gulp-uglify');
 const fractal = require('./fractal.js');
@@ -78,12 +77,6 @@ function sassbuild(cb) {
   .pipe(minifyCSS())
   .pipe(dest('./ui-assets/css'))
   cb();
-}
-
-function sasstojson() {
-  return src('./scss/_breakpoints.scss')
-  .pipe(sassJson())
-  .pipe(dest('./ui-assets/js')); // breakpoints.json
 }
 
 function scsslint(cb) {
