@@ -63,24 +63,41 @@
 
 <p>In DevTools, confirm that the <code>body</code> tag has a class of <code>js-working</code>.</p>
 
+<p>Confirm that all three JS files within /js/ are getting concatenated into main.js within /ui-assets/js/</p>
+
 <h3>Verifying JavaScript Linter (eslint)</h3>
 
-<p>In the terminal, there should be the following two errors:</p>
+<p>Open one of the three JS files in /js/ and save it to trigger the JS linting process.</p>
+
+<p>In the terminal, there should be the following three errors:</p>
 
 <pre>
   <samp>
-  /[user]/[path to repos]/cdlib-ui-kit/js/main.js
-    3:40 error Extra semicolon
-    5:20 error document.querySelector() is not supported in IE 8
+  /[user]/[path to repos]/cdlib-ui-kit/js/testarrowfunction.js
+    9:1  error  fetch is not supported in IE 11
 
-  ✖ 2 problems (2 errors, 0 warnings)
-    1 error and 0 warnings potentially fixable with the `--fix` option.
+  /[user]/[path to repos]/cdlib-ui-kit/js/test-bodytag.js
+    5:40  error  Extra semicolon
+
+  /[user]/[path to repos]/cdlib-ui-kit/js/test-selector.js
+    3:5  error  'unused' is defined but never used
   </samp>
 </pre>
 
+<p>The fetch error confirms that the eslint plugin, eslint-plugin-compat, is working properly.</p>
+
+<p>The semicolon and unused errors confirm that the eslint plugin, eslint-plugin-standard, is working property.</p>
+
+<p>In the file test-selector.js, the two variables <code>ignoreThisLine</code> and <code>ignoreNextLine</code> should be getting ignored by eslint due to the use of eslint ignore directives; they should not be throwing eslint errors.</p>
+
 <h3>Verifying JavaScript Compiler (babel)</h3>
 
-<p>In /ui-assets/js/main.js, check that the ES2015 arrow function declared with the <code>const</code> variable <code>arrowFunctionTest</code> is getting compiled to the ES5 equivalent syntax. The variable should be declared as <code>var</code>.</p>
+<p>In /ui-assets/js/main.js, confirm the following:</p>
+
+<ol>
+  <li>The ES2015 arrow function declared with the <code>const</code> variable <code>arrowFunctionTest</code> in /js/test-arrowfunction.js is getting compiled to the ES5 equivalent syntax. The variable should be declared as <code>var</code></li>
+  <li>All lines end in a semicolon.</li>
+</ol>
 
 <h2>Build Tasks</h2>
 

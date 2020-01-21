@@ -2,6 +2,7 @@ const babel = require('gulp-babel');
 const del = require('del');
 const { src, dest, watch, series, parallel } = require('gulp');
 const minifyCSS = require('gulp-clean-css');
+const concat = require('gulp-concat');
 const eslint = require('gulp-eslint');
 const postcss = require('gulp-postcss');
 const sass = require('gulp-sass');
@@ -104,6 +105,7 @@ function jslint(cb) {
 
 function jswatch(cb) {
   return src('./js/*.js', { sourcemaps: true })
+  .pipe(concat('main.js'))
   .pipe(babel({
     presets: ['@babel/env']
   }))
@@ -113,6 +115,7 @@ function jswatch(cb) {
 
 function jsbuild(cb) {
   return src(['./js/*.js'])
+  .pipe(concat('main.js'))
   .pipe(babel({
     presets: ['@babel/env']
   }))
