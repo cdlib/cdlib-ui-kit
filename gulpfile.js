@@ -17,7 +17,7 @@ exports.default = parallel(sasswatch, jswatch, fractalstart, watcher);
 
 exports.build = series(clean, sassbuild, scsslint, jslint, jsbuild, fractalbuild, pushassetslocal);
 
-exports.deploy = series(clean, sassbuild, fractalbuild, pushassetslocal, uploadlibrary);
+exports.deploy = series(clean, sassbuild, scsslint, jslint, jsbuild, fractalbuild, pushassetslocal, uploadlibrary);
 
 exports.updatedev = series(pushassetsdev, gitpulldev);
 
