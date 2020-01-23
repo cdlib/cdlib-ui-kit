@@ -61,3 +61,17 @@ code {
   }
 
 }
+
+.test-postcsslogical {
+  position: relative;
+  border: 1px solid $color-darkred;
+  inline-size: 80%;
+  block-size: 150px;
+
+  > div {
+    position: absolute;
+    border: 1px solid $color-green;
+    inset: 10px 40px 60px 30%;
+  }
+
+}

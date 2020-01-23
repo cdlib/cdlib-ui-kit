@@ -47,6 +47,18 @@
   <div class="test-grid-4">Cell 4</div>
 </div>
 
+<h3>Verifying PostCSS Logical Plugin</h3>
+
+<p>In the SCSS, the logical properties <code>inline-size</code>, <code>block-size</code>, and <code>inset</code> should be converted to the physical properties <code>width</code>, <code>height</code>, and <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code> respectively in the CSS.</p>
+
+<p>There should be a green box inset 10px from the top, 40px from the right, 60px from the bottom, and 30% from the left of a red box 80% wide and 150px high:</p>
+
+<div class="test-postcsslogical">
+  <div>Child Box</div>
+</div>
+
+<p>This would confirm that the <a href="https://github.com/csstools/postcss-logical">postcss-logical</a> plugin is working.</p>
+
 <h3>Verifying SVG Injection into CSS</h3>
 
 <p class="test-icon">A green "check" icon as a background image should appear here:</p>

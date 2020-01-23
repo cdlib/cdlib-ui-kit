@@ -41,6 +41,7 @@
     "gulp-uglify": "^3.0.2",
     "modern-normalize": "^0.6.0",
     "postcss-import": "^12.0.1",
+    "postcss-logical": "^4.0.2",
     "postcss-svg": "^3.0.0"
   },
   "babel": {

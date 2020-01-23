@@ -8,6 +8,9 @@ module.exports = {
     require('postcss-svg')({
       dirs: 'icons/',
       svgo: {}
+    }),
+    require('postcss-logical')({
+      dir: 'ltr'
     })
   ]
 }
