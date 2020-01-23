@@ -9,7 +9,7 @@ const sass = require('gulp-sass');
 const sassLint = require('gulp-sass-lint');
 const uglify = require('gulp-uglify');
 const fractal = require('./fractal.js');
-const { exec } = require('child_process');
+const { spawn } = require('child_process');
 
 // Public Tasks:
 
@@ -119,76 +119,67 @@ function jsbuild(cb) {
 
 // Rsync Tasks:
 
-function uploadlibrary(cb) {
-  return exec('rsync -rvu --delete --exclude \'.DS_Store\' ./dist/ webprod@webprod.cdlib.org:/apps/webprod/apache/htdocs/cdlib/cdlib-ui', function(err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
+function uploadlibrary() {
+  return spawn('rsync -rvu --delete --exclude \'.DS_Store\' ./dist/ webprod@webprod.cdlib.org:/apps/webprod/apache/htdocs/cdlib/cdlib-ui', {
+    stdio: 'inherit',
+    shell: true
   });
 }
 
-function pullassetsdev(cb) {
-  return exec('rsync -rvu cdlib@web-cdlib2x2-dev.cdlib.org:/apps/cdlib/apache/htdocs/wp-content/themes/cdlib/ui-assets ./', function(err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
+function pullassetsdev() {
+  return spawn('rsync -rvu cdlib@web-cdlib2x2-dev.cdlib.org:/apps/cdlib/apache/htdocs/wp-content/themes/cdlib/ui-assets ./', {
+    stdio: 'inherit',
+    shell: true
   });
 }
 
-function pushassetslocal(cb) {
-  return exec('rsync -rvu --delete --exclude \'.DS_Store\' ./dist/ui-assets /Users/jhagedorn/Documents/cdlib-local/htdocs/wp-content/themes/cdlib', function(err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
+function pushassetslocal() {
+  return spawn('rsync -rvu --delete --exclude \'.DS_Store\' ./dist/ui-assets /Users/jhagedorn/Documents/cdlib-local/htdocs/wp-content/themes/cdlib', {
+    stdio: 'inherit',
+    shell: true
   });
 }
 
-function pushassetsdev(cb) {
-  return exec('rsync -rvu --delete --exclude \'.DS_Store\' ./dist/ui-assets cdlib@web-cdlib2x2-dev.cdlib.org:/apps/cdlib/apache/htdocs/wp-content/themes/cdlib', function(err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
+function pushassetsdev() {
+  return spawn('rsync -rvu --delete --exclude \'.DS_Store\' ./dist/ui-assets cdlib@web-cdlib2x2-dev.cdlib.org:/apps/cdlib/apache/htdocs/wp-content/themes/cdlib', {
+    stdio: 'inherit',
+    shell: true
   });
 }
 
-function pushassetsstage(cb) {
-  return exec('rsync -rvu --delete --exclude \'.DS_Store\' ./dist/ui-assets cdlib@web-cdlib2x2-stg-2a.cdlib.org:/apps/cdlib/apache/htdocs/wp-content/themes/cdlib', function(err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
+function pushassetsstage() {
+  return spawn('rsync -rvu --delete --exclude \'.DS_Store\' ./dist/ui-assets cdlib@web-cdlib2x2-stg-2a.cdlib.org:/apps/cdlib/apache/htdocs/wp-content/themes/cdlib', {
+    stdio: 'inherit',
+    shell: true
   });
 }
 
-function pushassetsprod(cb) {
-  return exec('rsync -rvu --delete --exclude \'.DS_Store\' ./dist/ui-assets cdlib@web-cdlib2x2-prd-2a.cdlib.org:/apps/cdlib/apache/htdocs/wp-content/themes/cdlib', function(err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
+function pushassetsprod() {
+  return spawn('rsync -rvu --delete --exclude \'.DS_Store\' ./dist/ui-assets cdlib@web-cdlib2x2-prd-2a.cdlib.org:/apps/cdlib/apache/htdocs/wp-content/themes/cdlib', {
+    stdio: 'inherit',
+    shell: true
   });
 }
 
 // // Server Git Pull Shell Tasks
 
-function gitpulldev(cb) {
-  return exec('ssh cdlib@web-cdlib2x2-dev.cdlib.org /apps/cdlib/bin/remote_git_pull_dev.sh', function(err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
+function gitpulldev() {
+  return spawn('ssh cdlib@web-cdlib2x2-dev.cdlib.org /apps/cdlib/bin/remote_git_pull_dev.sh', {
+    stdio: 'inherit',
+    shell: true
   });
 }
 
-function gitpullstage(cb) {
-  return exec('ssh cdlib@web-cdlib2x2-stg-2a.cdlib.org /apps/cdlib/bin/remote_git_pull_stg.sh', function(err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
+function gitpullstage() {
+  return spawn('ssh cdlib@web-cdlib2x2-stg-2a.cdlib.org /apps/cdlib/bin/remote_git_pull_stg.sh', {
+    stdio: 'inherit',
+    shell: true
   });
 }
 
-function gitpullprod(cb) {
-  return exec('ssh cdlib@web-cdlib2x2-prd-2a.cdlib.org /apps/cdlib/bin/remote_git_pull_prd.sh', function(err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
+function gitpullprod() {
+  return spawn('ssh cdlib@web-cdlib2x2-prd-2a.cdlib.org /apps/cdlib/bin/remote_git_pull_prd.sh', {
+    stdio: 'inherit',
+    shell: true
   });
 }
