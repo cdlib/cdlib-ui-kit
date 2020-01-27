@@ -4,6 +4,7 @@ const { src, dest, watch, series, parallel } = require('gulp');
 const minifyCSS = require('gulp-clean-css');
 const concat = require('gulp-concat');
 const eslint = require('gulp-eslint');
+const ghPages = require('gulp-gh-pages');
 const postcss = require('gulp-postcss');
 const sass = require('gulp-sass');
 const sassLint = require('gulp-sass-lint');
@@ -17,7 +18,7 @@ exports.default = parallel(sasswatch, jswatch, fractalstart, watcher);
 
 exports.build = series(clean, sassbuild, scsslint, jslint, jsbuild, fractalbuild, pushassetslocal);
 
-exports.deploy = series(clean, sassbuild, scsslint, jslint, jsbuild, fractalbuild, pushassetslocal, uploadlibrary);
+exports.deploy = series(clean, sassbuild, scsslint, jslint, jsbuild, fractalbuild, pushassetslocal, githubpages);
 
 exports.updatedev = series(pushassetsdev, gitpulldev);
 
@@ -117,14 +118,13 @@ function jsbuild(cb) {
   cb();
 }
 
-// Rsync Tasks:
-
-function uploadlibrary() {
-  return spawn('rsync -rvu --delete --exclude \'.DS_Store\' ./dist/ webprod@webprod.cdlib.org:/apps/webprod/apache/htdocs/cdlib/cdlib-ui', {
-    stdio: 'inherit',
-    shell: true
-  });
+function githubpages(cb) {
+  return src('./dist/**/*')
+  .pipe(ghPages())
+  cb();
 }
+
+// Rsync Tasks:
 
 function pullassetsdev() {
   return spawn('rsync -rvu cdlib@web-cdlib2x2-dev.cdlib.org:/apps/cdlib/apache/htdocs/wp-content/themes/cdlib/ui-assets ./', {
