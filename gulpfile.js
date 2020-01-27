@@ -20,6 +20,8 @@ exports.build = series(clean, sassbuild, scsslint, jslint, jsbuild, fractalbuild
 
 exports.deploy = series(clean, sassbuild, scsslint, jslint, jsbuild, fractalbuild, pushassetslocal, githubpages);
 
+exports.test = series(settestenvironment, clean, sassbuild, scsslint, jslint, jsbuild, fractalbuild, startserver, runpercy, stopserver, setdevenvironment);
+
 exports.updatedev = series(pushassetsdev, gitpulldev);
 
 exports.updatestage = series(pushassetsstage, gitpullstage);
@@ -51,6 +53,28 @@ function fractalbuild(cb) {
 }
 
 // General Tasks:
+
+async function startserver() {
+  return spawn('npm run startpercyserver', {
+    stdio: 'inherit',
+    shell: true
+  });
+}
+
+async function stopserver() {
+  return spawn('npm run stoppercyserver', {
+    stdio: 'inherit',
+    shell: true
+  });
+}
+
+async function setdevenvironment() {
+  return process.env.NODE_ENV = 'development';
+}
+
+async function settestenvironment() {
+  return process.env.NODE_ENV = 'testing';
+}
 
 function clean(cb) {
   return del(['./dist/**', './ui-assets/css/sourcemaps'])
@@ -121,6 +145,14 @@ function jsbuild(cb) {
 function githubpages(cb) {
   return src('./dist/**/*')
   .pipe(ghPages())
+  cb();
+}
+
+function runpercy(cb) {
+  return spawn('npm run percy', {
+    stdio: 'inherit',
+    shell: true
+  });
   cb();
 }
 

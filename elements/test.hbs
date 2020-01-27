@@ -132,3 +132,24 @@
 <p>Confirm that /dist/ui-assets/css/main.css is minified without any sourcemaps.</p>
 
 <p>Confirm that /dist/ui-assets/js/main.js is minified without any sourcemaps.</p>
+
+<h2>Test Tasks</h2>
+
+<p>Run 'gulp test' in your terminal to begin the test process. This will include the following tasks:</p>
+
+<ol>
+  <li>All build tasks listed above.</li>
+  <li>The starting up of http-server (for Percy snapshots).</li>
+  <li>The creation of a Percy build with snapshots on the Percy website.</li>
+  <li>The stopping of http-server.</li>
+</ol>
+
+<h3>Verify Percy Builds</h3>
+
+<p>Check that Percy created a build at <a href="https://percy.io/CDL1/cdlib-ui">https://percy.io/CDL1/cdlib-ui</a> (login required).</p>
+
+<p>Run the 'gulp test' process again to generate another Percy build. Compare the first and second build from the Percy website. The second build should contain no visual differences (unchanged snapshots) from the first. The paragraph of lorem ipsum text under the <strong>Verifying Faker Library</strong> heading should not have changed.</p>
+
+<p>This verifies that Percy builds are getting created, the "testing" environment is getting set, and the faker data is not randomizing (staying fixed) between each build.</p>
+
+<p>[end of all tests]</p>

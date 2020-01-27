@@ -4,7 +4,10 @@
   "description": "The toolkit for the cdlib-ui repository",
   "main": "index.html",
   "scripts": {
-    "copy-install": "echo $(tput setaf 4)Copying fractal, gulp, and package.json files to cdlib-ui repo $(tput sgr 0) ... && cp -prv browserslist-stats.json fractal_subtheme fractal.js gulpfile.js package-lock.json package.json postcss.config.js sass-lint-config.yml ../cdlib-ui/ && echo $(tput setaf 4)Moving over to cdlib-ui repo $(tput sgr 0) ... && cd ../cdlib-ui/ && echo $(tput setaf 4)Installing node packages within cdlib-ui repo $(tput sgr 0) ... && npm install && echo $(tput setaf 4)Moving back to cdlib-ui-kit repo $(tput sgr 0) ... && cd ../cdlib-ui-kit/ && echo $(tput setaf 4)All done.$(tput sgr 0)"
+    "copy-install": "echo $(tput setaf 4)Copying build tool files to cdlib-ui repo $(tput sgr 0) ... && cp -prv browserslist-stats.json fractal_subtheme fractal.js gulpfile.js package-lock.json package.json postcss.config.js sass-lint-config.yml ../cdlib-ui/ && echo $(tput setaf 4)Moving over to cdlib-ui repo $(tput sgr 0) ... && cd ../cdlib-ui/ && echo $(tput setaf 4)Installing node packages within cdlib-ui repo $(tput sgr 0) ... && npm install && echo $(tput setaf 4)Moving back to cdlib-ui-kit repo $(tput sgr 0) ... && cd ../cdlib-ui-kit/ && echo $(tput setaf 4)All done.$(tput sgr 0)",
+    "percy": "export PERCY_TOKEN=45278516a32a947f175c5573cbc679f3821fd327da42f41d67127536577edec8 && percy exec -- node snapshots.js",
+    "startpercyserver": "http-server ./dist/ -c-1",
+    "stoppercyserver": "pkill http-server"
   },
   "repository": {
     "type": "git",
@@ -21,6 +24,7 @@
     "@babel/preset-env": "^7.8.3",
     "@frctl/fractal": "^1.2.1",
     "@frctl/mandelbrot": "^1.2.1",
+    "@percy/script": "^1.0.3",
     "autoprefixer": "^9.7.4",
     "del": "^5.1.0",
     "eslint-config-standard": "^14.1.0",
@@ -40,6 +44,7 @@
     "gulp-sass": "^4.0.2",
     "gulp-sass-lint": "^1.4.0",
     "gulp-uglify": "^3.0.2",
+    "http-server": "^0.12.1",
     "modern-normalize": "^0.6.0",
     "postcss-import": "^12.0.1",
     "postcss-logical": "^4.0.2",
@@ -61,6 +66,16 @@
     },
     "env": {
       "browser": true
+    }
+  },
+  "percy": {
+    "version": 1,
+    "snapshot": {
+      "widths": [
+        480,
+        760,
+        870
+      ]
     }
   },
   "dependencies": {}
