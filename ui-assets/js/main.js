@@ -1,0 +1,1 @@
+"use strict";var arrowFunctionTest=function(t,e){return t*e};console.log(arrowFunctionTest(7,7)),fetch("https://cdlib.org");var unused,bodytagtest=document.getElementsByTagName("body")[0];bodytagtest.classList.add("js-working");var ignoreThisLine,ignoreNextLine,selectortest=document.querySelector(".test-javascript");selectortest.innerHTML="yes";
