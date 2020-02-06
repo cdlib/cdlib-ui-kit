@@ -7,7 +7,7 @@ const eslint = require('gulp-eslint');
 const ghPages = require('gulp-gh-pages');
 const postcss = require('gulp-postcss');
 const sass = require('gulp-sass');
-const sassLint = require('gulp-sass-lint');
+const stylelint = require('gulp-stylelint');
 const uglify = require('gulp-uglify');
 const fractal = require('./fractal.js');
 const { spawn } = require('child_process');
@@ -106,11 +106,11 @@ function sassbuild(cb) {
 
 function scsslint(cb) {
   return src('./scss/*.scss')
-  .pipe(sassLint({
-    configFile: 'sass-lint-config.yml'
-  }))
-  .pipe(sassLint.format())
-  .pipe(sassLint.failOnError())
+  .pipe(stylelint({
+    reporters: [
+      {formatter: 'string', console: true}
+    ]
+  }));
   cb();
 }
 

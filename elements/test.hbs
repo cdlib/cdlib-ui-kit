@@ -15,19 +15,16 @@
 
 <h3>Verifying Sass Linter</h3>
 
-<p class="test-sass-lint">In the terminal, there should be the following two warnings:</p>
+<p class="test-sass-lint">In the terminal, there should be the following warning:</p>
 
 <pre>
   <samp>
   scss/_tests.scss
-    12:3  warning  Expected `display`, found `cursor`  property-sort-order
-    13:3  warning  Expected `cursor`, found `display`  property-sort-order
-
-  ✖ 2 problems (0 errors, 2 warnings)
+    13:3  ⚠  Expected "display" to come before "cursor"
   </samp>
 </pre>
 
-<p>This CSS property sort order warning (intentional for this test) confirms that the gulp-sass-lint plugin is working.</p>
+<p>This CSS property sort order warning (intentional for this test) confirms that the <a href="https://stylelint.io/">stylelint</a> linter is working.</p>
 
 <h3>Verifying Modern Normalize CSS Module</h3>
 
