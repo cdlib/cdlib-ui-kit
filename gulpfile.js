@@ -7,6 +7,7 @@ const eslint = require('gulp-eslint');
 const ghPages = require('gulp-gh-pages');
 const postcss = require('gulp-postcss');
 const sass = require('gulp-sass');
+const sitemap = require('gulp-sitemap');
 const stylelint = require('gulp-stylelint');
 const uglify = require('gulp-uglify');
 const fractal = require('./fractal.js');
@@ -20,7 +21,7 @@ exports.build = series(clean, sassbuild, scsslint, jslint, jsbuild, fractalbuild
 
 exports.deploy = series(clean, sassbuild, scsslint, jslint, jsbuild, fractalbuild, pushassetslocal, githubpages);
 
-exports.test = series(settestenvironment, clean, sassbuild, scsslint, jslint, jsbuild, fractalbuild, startserver, runpercy, stopserver, setdevenvironment);
+exports.test = series(settestenvironment, clean, sassbuild, scsslint, jslint, jsbuild, fractalbuild, makesitemap, startserver, runa11y, runpercy, stopserver, setdevenvironment);
 
 exports.updatedev = series(pushassetsdev, gitpulldev);
 
@@ -55,14 +56,14 @@ function fractalbuild(cb) {
 // General Tasks:
 
 async function startserver() {
-  return spawn('npm run startpercyserver', {
+  return spawn('npm run starttestserver', {
     stdio: 'inherit',
     shell: true
   });
 }
 
 async function stopserver() {
-  return spawn('npm run stoppercyserver', {
+  return spawn('npm run stoptestserver', {
     stdio: 'inherit',
     shell: true
   });
@@ -154,6 +155,22 @@ function runpercy(cb) {
     shell: true
   });
   cb();
+}
+
+function runa11y() {
+  return spawn('npm run a11y', {
+    stdio: 'inherit',
+    shell: true
+  });
+}
+
+function makesitemap() {
+  return src('./dist/components/preview/*.html')
+  .pipe(sitemap({
+    siteUrl: 'http://localhost:8080/components/preview',
+    noindex: true
+  }))
+  .pipe(dest('./dist'))
 }
 
 // Rsync Tasks:

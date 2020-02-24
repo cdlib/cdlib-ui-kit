@@ -141,6 +141,38 @@
   <li>The stopping of http-server.</li>
 </ol>
 
+<h3>Verifying Accessibility Testing</h3>
+
+<p>This is an <code>&lt;input&gt;</code> tag missing a label:</p>
+
+<input type="text" class="test-input-missing-label">
+
+<p>This should trigger the following two accessibility errors via the <a href="https://github.com/pa11y/pa11y-ci">pa11y-ci</a> plugin in the terminal:</p>
+
+<pre>
+  <samp>
+  • This textinput element does not have a name available to an accessibility
+   API. Valid names are: label element, title undefined, aria-label undefined,
+   aria-labelledby undefined.
+
+  (html > body > input)
+
+  &lt;input type="text" class="test-input-missing-label"&gt;
+
+  • This form field should be labelled in some way. Use the label element
+   (either with a "for" attribute or wrapped around the form field), or
+   "title", "aria-label" or "aria-labelledby" attributes as appropriate.
+
+  (html > body > input)
+
+  &lt;input type="text" class="test-input-missing-label"&gt;
+  </samp>
+</pre>
+
+<h3>Verifying UI Library Published on GitHub Pages</h3>
+
+<p>Confirm that the UI Library was published to the GitHub Pages URL: <a href="https://cdlib.github.io/cdlib-ui-kit">https://cdlib.github.io/cdlib-ui-kit</a>.</p>
+
 <h3>Verify Percy Builds</h3>
 
 <p>Check that Percy created a build at <a href="https://percy.io/CDL1/cdlib-ui">https://percy.io/CDL1/cdlib-ui</a> (login required).</p>
