@@ -5,7 +5,9 @@ if (process.env.NODE_ENV === 'testing') {
 }
 
 module.exports = {
-  label: 'Toolkit Tests',
+  label: 'Other',
+  preview: '@template-page',
+  order: 2,
   context: {
     test: {
       text: faker.lorem.paragraph()

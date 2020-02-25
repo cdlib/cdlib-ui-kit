@@ -143,9 +143,7 @@
 
 <h3>Verifying Accessibility Testing</h3>
 
-<p>This is an <code>&lt;input&gt;</code> tag missing a label:</p>
-
-<input type="text" class="test-input-missing-label">
+<p>Browse to the "Other" page. On that page is an <code>&lt;input&gt;</code> tag missing a label:</p>
 
 <p>This should trigger the following two accessibility errors via the <a href="https://github.com/pa11y/pa11y-ci">pa11y-ci</a> plugin in the terminal:</p>
 
@@ -168,6 +166,10 @@
   &lt;input type="text" class="test-input-missing-label"&gt;
   </samp>
 </pre>
+
+<p>Below is the same <code>&lt;input&gt;</code> tag missing a label, but it should get skipped during the accessibility testing because pages using the "default" template do not get checked for accessibility.</p>
+
+<input type="text" class="test-input-missing-label">
 
 <h3>Verifying UI Library Published on GitHub Pages</h3>
 

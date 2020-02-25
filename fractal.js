@@ -23,7 +23,7 @@ fractal.web.set('static.mount', 'ui-assets');
 fractal.web.set('builder.dest', __dirname + '/dist');
 
 // Fractal global preview component handle:
-fractal.components.set('default.preview', '@template');
+fractal.components.set('default.preview', '@template-default');
 
 // BrowserSync options:
 fractal.web.set('server.syncOptions', {
