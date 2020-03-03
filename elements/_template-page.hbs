@@ -4,7 +4,13 @@
     <meta charset="utf-8">
     <title>CDLIB UI Kit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <link rel="stylesheet" href="{{ path '/ui-assets/css/main.css' }}" media="all">
+    <style>
+      /* {{ render '@criticalcss' }} */
+    </style>
+    <link rel="stylesheet" href="{{ path '/ui-assets/css/noncritical.css' }}" media="print" onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="{{ path '/ui-assets/css/noncritical.css' }}" media="all">
+    </noscript>
   </head>
   <body>
     {{{ yield }}}

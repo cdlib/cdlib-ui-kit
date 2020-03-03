@@ -6,6 +6,7 @@ const concat = require('gulp-concat');
 const eslint = require('gulp-eslint');
 const ghPages = require('gulp-gh-pages');
 const postcss = require('gulp-postcss');
+const rename = require("gulp-rename");
 const sass = require('gulp-sass');
 const sitemap = require('gulp-sitemap');
 const stylelint = require('gulp-stylelint');
@@ -15,13 +16,13 @@ const { spawn } = require('child_process');
 
 // Public Tasks:
 
-exports.default = parallel(sasswatch, jswatch, fractalstart, watcher);
+exports.default = series(sasswatch, criticalcss, parallel(jswatch, fractalstart, watcher));
 
-exports.build = series(clean, sassbuild, scsslint, jslint, jsbuild, fractalbuild, pushassetslocal);
+exports.build = series(clean, sassbuild, criticalcss, scsslint, jslint, jsbuild, fractalbuild, pushassetslocal);
 
-exports.deploy = series(clean, sassbuild, scsslint, jslint, jsbuild, fractalbuild, pushassetslocal, githubpages);
+exports.deploy = series(clean, sassbuild, criticalcss, scsslint, jslint, jsbuild, fractalbuild, pushassetslocal, githubpages);
 
-exports.test = series(settestenvironment, clean, sassbuild, scsslint, jslint, jsbuild, fractalbuild, makesitemap, startserver, runa11y, runpercy, stopserver, setdevenvironment);
+exports.test = series(settestenvironment, clean, sassbuild, criticalcss, scsslint, jslint, jsbuild, fractalbuild, makesitemap, startserver, runa11y, runpercy, stopserver, setdevenvironment);
 
 exports.updatedev = series(pushassetsdev, gitpulldev);
 
@@ -83,7 +84,7 @@ function clean(cb) {
 }
 
 function watcher(cb) {
-  watch('./scss/*.scss', parallel(sasswatch, scsslint));
+  watch('./scss/*.scss', parallel(series(sasswatch, criticalcss), scsslint));
   watch('./js/*.js', parallel(jswatch, jslint));
   cb();
 }
@@ -102,6 +103,13 @@ function sassbuild(cb) {
   .pipe(postcss())
   .pipe(minifyCSS())
   .pipe(dest('./ui-assets/css'))
+  cb();
+}
+
+function criticalcss(cb) {
+  return src('./ui-assets/css/critical.css')
+  .pipe(rename('_criticalcss.hbs'))
+  .pipe(dest('./elements/'))
   cb();
 }
 

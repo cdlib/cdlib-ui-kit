@@ -1,0 +1,41 @@
+// Autoprefixer tests
+
+.test-autoprefixer-basic {
+  user-select: auto;
+}
+
+.test-autoprefixer-grid {
+  display: grid;
+  grid-gap: 5px;
+  grid-template:
+    'header header'
+    'cell1 cell2'
+    'cell3 cell4'
+    / 1fr 1fr;
+
+  > * {
+    padding: 5px;
+    border: 1px solid $color-gray;
+  }
+
+  .test-grid-header {
+    grid-area: header;
+  }
+
+  .test-grid-1 {
+    grid-area: cell1;
+  }
+
+  .test-grid-2 {
+    grid-area: cell2;
+  }
+
+  .test-grid-3 {
+    grid-area: cell3;
+  }
+
+  .test-grid-4 {
+    grid-area: cell4;
+  }
+
+}

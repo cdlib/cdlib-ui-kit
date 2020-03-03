@@ -4,16 +4,26 @@
 
 <p>Run 'gulp' in your terminal to begin the following tests:</p>
 
-<h3>Verifying Sass Complilation</h3>
+<h3>Verifying SCSS Complilation</h3>
 
-<p><span class="test-sass">This text should be green</span> and <code>code</code> red, which confirms the following:</p>
+<p>This <code>code</code> and other code samples on this page should be red. All text on this page should be styled in the system-ui font. These conditions confirm the following:</p>
 
-<ul>
-  <li>The Sass in _tests.scss is getting compliled to CSS via import from main.scss.</li>
-  <li>The Sass variables <code>$color-green</code> and <code>$color-darkred</code> are getting interpreted from the _variables.scss file</li>
-</ul>
+<ol>
+  <li>The <a href="https://github.com/sindresorhus/modern-normalize">modern-normalize</a> CSS library is getting imported into _critical.scss via the <a href="https://github.com/postcss/postcss-import">postcss-import</a> plugin</li>
+  <li>The scss in _critical.scss is getting compliled to critical.css</li>
+  <li>The compiled CSS file critical.css is getting inlined into the <code>&lt;style&gt;</code> tag within the <code>&lt;head&gt;</code> of the Fractal templates</li>
+  <li>The scss variable <code>$color-darkred</code> is getting compiled from the _variables.scss file</li>
+</ol>
 
-<h3>Verifying Sass Linter</h3>
+<p><span class="test-main-scss">This text should be green</span> which confirms the following:</p>
+
+<ol>
+  <li>The scss in _tests.scss is getting compliled to noncritical.css via import from noncritical.scss</li>
+  <li>The compiled CSS file noncritical.css is loading from the <code>&lt;link&gt;</code> tag within the <code>&lt;head&gt;</code> of the Fractal templates</li>
+  <li>The scss variable <code>$color-green</code> is getting compiled from the _variables.scss file</li>
+</ol>
+
+<h3>Verifying SCSS Linter</h3>
 
 <p class="test-sass-lint">In the terminal, there should be the following warning:</p>
 
@@ -25,10 +35,6 @@
 </pre>
 
 <p>This CSS property sort order warning (intentional for this test) confirms that the <a href="https://stylelint.io/">stylelint</a> linter is working.</p>
-
-<h3>Verifying Modern Normalize CSS Module</h3>
-
-<p>All text on this page should be styled using the system font, according to the <a href="https://github.com/sindresorhus/modern-normalize/issues/3">Modern Normalize system font stack</a>. This confirms that the <a href="https://github.com/postcss/postcss-import">postcss-import</a> plugin is working.</p>
 
 <h3>Verifying Autoprefixer's Basic Prefixing</h3>
 
@@ -126,7 +132,7 @@
 
 <h3>Verifying Asset File Minification</h3>
 
-<p>Confirm that /dist/ui-assets/css/main.css is minified without any sourcemaps.</p>
+<p>Confirm that /dist/ui-assets/css/noncritical.css is minified without any sourcemaps.</p>
 
 <p>Confirm that /dist/ui-assets/js/main.js is minified without any sourcemaps.</p>
 

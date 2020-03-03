@@ -1,0 +1,9 @@
+// Critical CSS inlined into <style> element within template <head>
+
+@import '../node_modules/modern-normalize/modern-normalize.css';
+
+@import 'variables';
+
+code {
+  color: $color-darkred;
+}

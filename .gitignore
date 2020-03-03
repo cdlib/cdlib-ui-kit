@@ -1,5 +1,6 @@
 .DS_Store
 dist
+elements/_criticalcss.hbs
 .publish
 node_modules
 ui-assets
