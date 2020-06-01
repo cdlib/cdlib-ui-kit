@@ -2,7 +2,6 @@ const babel = require('gulp-babel');
 const del = require('del');
 const { src, dest, watch, series, parallel } = require('gulp');
 const minifyCSS = require('gulp-clean-css');
-const concat = require('gulp-concat');
 const eslint = require('gulp-eslint');
 const ghPages = require('gulp-gh-pages');
 const postcss = require('gulp-postcss');
@@ -10,19 +9,18 @@ const rename = require("gulp-rename");
 const sass = require('gulp-sass');
 const sitemap = require('gulp-sitemap');
 const stylelint = require('gulp-stylelint');
-const uglify = require('gulp-uglify');
 const fractal = require('./fractal.js');
 const { spawn } = require('child_process');
 
 // Public Tasks:
 
-exports.default = series(sasswatch, criticalcss, parallel(jswatch, fractalstart, watcher));
+exports.default = series(sasswatch, criticalcss, jswatch, runparceldev, fractalstart, watcher);
 
-exports.build = series(clean, sassbuild, criticalcss, scsslint, jslint, jsbuild, fractalbuild, pushassetslocal);
+exports.build = series(clean, sassbuild, criticalcss, scsslint, jslint, jsbuild, runparcelbuild, fractalbuild, pushassetslocal);
 
-exports.deploy = series(clean, sassbuild, criticalcss, scsslint, jslint, jsbuild, fractalbuild, pushassetslocal, githubpages);
+exports.deploy = series(clean, sassbuild, criticalcss, scsslint, jslint, jsbuild, runparcelbuild, fractalbuild, pushassetslocal, githubpages);
 
-exports.test = series(settestenvironment, clean, sassbuild, criticalcss, scsslint, jslint, jsbuild, fractalbuild, makesitemap, startserver, runa11y, runpercy, stopserver, setdevenvironment);
+exports.test = series(settestenvironment, clean, sassbuild, criticalcss, scsslint, jslint, jsbuild, runparcelbuild, fractalbuild, makesitemap, startserver, runa11y, runpercy, stopserver, setdevenvironment);
 
 exports.updatedev = series(pushassetsdev, gitpulldev);
 
@@ -79,13 +77,13 @@ async function settestenvironment() {
 }
 
 function clean(cb) {
-  return del(['./dist/**', './ui-assets/css/sourcemaps'])
+  return del(['./dist/**', './ui-assets/css/sourcemaps', './js/.babeled'])
   cb();
 }
 
 function watcher(cb) {
   watch('./scss/*.scss', parallel(series(sasswatch, criticalcss), scsslint));
-  watch('./js/*.js', parallel(jswatch, jslint));
+  watch('./js/*.js', series(jswatch, runparceldev, jslint));
   cb();
 }
 
@@ -130,24 +128,31 @@ function jslint(cb) {
   cb();
 }
 
+async function runparceldev() {
+  return spawn('npm run parcel-dev --silent', {
+    stdio: 'inherit',
+    shell: true
+  });
+}
+
+async function runparcelbuild() {
+  return spawn('npm run parcel-build --silent', {
+    stdio: 'inherit',
+    shell: true
+  });
+}
+
 function jswatch(cb) {
   return src('./js/*.js', { sourcemaps: true })
-  .pipe(concat('main.js'))
-  .pipe(babel({
-    presets: ['@babel/env']
-  }))
-  .pipe(dest('./ui-assets/js', { sourcemaps: true }))
+  .pipe(babel())
+  .pipe(dest('./js/.babeled', { sourcemaps: true }))
   cb();
 }
 
 function jsbuild(cb) {
-  return src(['./js/*.js'])
-  .pipe(concat('main.js'))
-  .pipe(babel({
-    presets: ['@babel/env']
-  }))
-  .pipe(uglify())
-  .pipe(dest('./ui-assets/js'))
+  return src('./js/*.js')
+  .pipe(babel())
+  .pipe(dest('./js/.babeled'))
   cb();
 }
 

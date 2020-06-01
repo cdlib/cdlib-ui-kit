@@ -31,3 +31,18 @@
   }
 
 }
+
+.test-foreach {
+  display: flex;
+
+  li {
+    margin-right: 1em;
+    list-style: none;
+    cursor: pointer;
+
+    &.selected {
+      color: $color-green;
+    }
+  }
+
+}

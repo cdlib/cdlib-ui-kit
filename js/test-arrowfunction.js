@@ -5,5 +5,3 @@ const arrowFunctionTest = (x, y) => {
 }
 
 console.log(arrowFunctionTest(7, 7))
-
-fetch('https://cdlib.org')
