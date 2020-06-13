@@ -34,7 +34,6 @@
     "del": "^5.1.0",
     "eslint": "^7.2.0",
     "eslint-config-standard": "^14.1.1",
-    "eslint-plugin-compat": "^3.7.0",
     "eslint-plugin-import": "^2.21.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
@@ -79,15 +78,9 @@
     "> 2% in my stats"
   ],
   "eslintConfig": {
-    "extends": [
-      "plugin:compat/recommended",
-      "standard"
-    ],
+    "extends": "standard",
     "globals": {
       "Vue": "readonly"
-    },
-    "env": {
-      "browser": true
     }
   },
   "percy": {
