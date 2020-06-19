@@ -148,6 +148,21 @@
 
 <p>The ES2015 arrow function declared using the <code>const</code> variable in js/test-arrowfunction.js should have been transformed to the older ES5 function syntax in ui-assets/js/main.js, using the variable declaration <code>var</code>.</p>
 
+<h3>Verifying Node Module Bundling</h3>
+
+<p>The dependency <a href="https://github.com/javan/details-element-polyfill">details-element-polyfill</a> should be getting included within the Parcel bundle <em>.babeled.js</em>. This node module is getting imported from the file <em>/js/dependencies.js</em> during the gulp development and build processes.</p>
+
+<p>Below is a <code>details</code> HTML element. Clicking on the bold text "See More" should show a string of lorem ipsum text below it. Clicking the text again should hide the lorem ipsum text. This toggle behavior is expected in all modern browsers:</p>
+
+<details class="test-details">
+  <summary>See More</summary>
+  <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam debitis vel tenetur, deleniti saepe, in nisi obcaecati praesentium officiis accusantium? Voluptas, quasi. Quaerat rerum doloremque nesciunt voluptatem autem ad hic aliquid vitae odit tempore, delectus, maxime qui eaque nemo debitis magnam! Vitae vel dignissimos aliquam repudiandae soluta, quo enim exercitationem.</div>
+</details>
+
+<p>Open this page in IE 11, which does not natively support the <code>details</code> element. If the toggling behavior is similar to modern browsers, then the module <code>details-element-polyfill</code> has been successfully bundled by Parcel and is running normally.</p>
+
+<p>If the lorem ipsum text is already open and clicking "See More" text does not toggle the text below open or closed, then the module is not loading correctly.</p>
+
 <h2>Build Tasks</h2>
 
 <p>Run 'gulp build' in your terminal to begin the following tests:</p>

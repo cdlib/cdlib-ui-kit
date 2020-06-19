@@ -46,3 +46,17 @@
   }
 
 }
+
+.test-details {
+
+  summary {
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  div {
+    margin-top: .8rem;
+    padding-left: 1rem;
+    font-size: .9rem;
+  }
+}
