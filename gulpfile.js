@@ -14,13 +14,13 @@ const { spawn } = require('child_process');
 
 // Public Tasks:
 
-exports.default = series(sasswatch, criticalcss, jswatch, runparceldev, fractalstart, watcher);
+exports.default = series(sasswatch, criticalcss, jswatch, fractalstart, watcher);
 
-exports.build = series(clean, sassbuild, criticalcss, scsslint, jslint, jsbuild, runparcelbuild, fractalbuild, pushassetslocal);
+exports.build = series(clean, sassbuild, criticalcss, scsslint, jslint, jsbuild, fractalbuild, pushassetslocal);
 
-exports.deploy = series(clean, sassbuild, criticalcss, scsslint, jslint, jsbuild, runparcelbuild, fractalbuild, pushassetslocal, githubpages);
+exports.deploy = series(clean, sassbuild, criticalcss, scsslint, jslint, jsbuild, fractalbuild, pushassetslocal, githubpages);
 
-exports.test = series(settestenvironment, clean, sassbuild, criticalcss, scsslint, jslint, jsbuild, runparcelbuild, fractalbuild, makesitemap, startserver, runa11y, runpercy, stopserver, setdevenvironment);
+exports.test = series(settestenvironment, clean, sassbuild, criticalcss, scsslint, jslint, jsbuild, fractalbuild, makesitemap, startserver, runa11y, runpercy, stopserver, setdevenvironment);
 
 exports.updatedev = series(pushassetsdev, gitpulldev);
 
@@ -77,13 +77,13 @@ async function settestenvironment() {
 }
 
 function clean(cb) {
-  return del(['./dist/**', './ui-assets/css/sourcemaps', './js/.babeled'])
+  return del(['./dist/**', './ui-assets/**'])
   cb();
 }
 
 function watcher(cb) {
   watch('./scss/*.scss', parallel(series(sasswatch, criticalcss), scsslint));
-  watch('./js/*.js', series(jswatch, runparceldev, jslint));
+  watch('./js/*.js', series(jslint));
   cb();
 }
 
@@ -128,32 +128,18 @@ function jslint(cb) {
   cb();
 }
 
-async function runparceldev() {
-  return spawn('npm run parcel-dev --silent', {
+async function jswatch() {
+  return spawn('npm run js-watch --silent', {
     stdio: 'inherit',
     shell: true
   });
 }
 
-async function runparcelbuild() {
-  return spawn('npm run parcel-build --silent', {
+async function jsbuild() {
+  return spawn('npm run js-build --silent', {
     stdio: 'inherit',
     shell: true
   });
-}
-
-function jswatch(cb) {
-  return src('./js/*.js', { sourcemaps: true })
-  .pipe(babel())
-  .pipe(dest('./js/.babeled', { sourcemaps: true }))
-  cb();
-}
-
-function jsbuild(cb) {
-  return src('./js/*.js')
-  .pipe(babel())
-  .pipe(dest('./js/.babeled'))
-  cb();
 }
 
 function githubpages(cb) {

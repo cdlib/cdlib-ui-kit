@@ -10,8 +10,12 @@
     "stoptestserver": "pkill http-server",
     "percy": "export PERCY_TOKEN=45278516a32a947f175c5573cbc679f3821fd327da42f41d67127536577edec8 && percy exec -- node snapshots.js",
     "a11y": "pa11y-ci --sitemap http://localhost:8080/sitemap.xml --threshold 1000",
-    "parcel-dev": "NODE_ENV=development parcel build ./js/.babeled/index.js --out-dir ui-assets/js --out-file main.js --no-source-maps --no-minify",
-    "parcel-build": "parcel build ./js/.babeled/index.js --out-dir ui-assets/js --out-file main.js --no-source-maps"
+    "parcel-watch": "parcel watch .babeled.js --public-url . --out-dir ui-assets/js --out-file main.js --no-cache",
+    "parcel-build": "parcel build .babeled.js --out-dir ui-assets/js --out-file main.js --no-cache --no-source-maps",
+    "babel-watch": "babel ./js/ --watch --out-file .babeled.js --source-maps inline",
+    "babel-build": "babel ./js/ --out-file .babeled.js",
+    "js-watch": "npm run babel-watch & npm run parcel-watch",
+    "js-build": "npm run babel-build && npm run parcel-build"
   },
   "repository": {
     "type": "git",
@@ -24,6 +28,7 @@
   },
   "homepage": "https://github.com/cdlib/cdlib-ui-kit#readme",
   "devDependencies": {
+    "@babel/cli": "^7.10.1",
     "@babel/core": "^7.10.2",
     "@babel/preset-env": "^7.10.2",
     "@frctl/fractal": "^1.3.0",
@@ -110,5 +115,7 @@
       "no-descending-specificity": null
     }
   },
-  "dependencies": {}
+  "dependencies": {
+    "details-element-polyfill": "^2.4.0"
+  }
 }

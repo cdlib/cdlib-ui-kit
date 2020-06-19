@@ -86,7 +86,7 @@
   <li>Five</li>
 </ul>
 
-<p>Is the following HTML element with the selector <code>test-javascript</code> getting its text changed to "yes" as a result of the JS within the file <em>js/text-selector.js</em>?: (yes or no): <strong class="test-javascript">no</strong></p>
+<p>Is the following HTML element with the selector <code>test-javascript</code> getting its text changed to "yes" as a result of the JS within the file <em>js/test-selector.js</em>?: (yes or no): <strong class="test-javascript">no</strong></p>
 
 <h3>Verifying JavaScript Linter (eslint)</h3>
 
@@ -104,44 +104,49 @@
   </samp>
 </pre>
 
-<p>The semicolon and unused errors confirm that the eslint plugin, eslint-plugin-standard, is working property.</p>
+<p>The semicolon and unused errors confirm that the eslint and standard javascript plugins are working properly.</p>
 
 <p>In the file test-selector.js, the two variables <code>ignoreThisLine</code> and <code>ignoreNextLine</code> should be getting ignored by eslint due to the use of eslint ignore directives; they should not be throwing eslint errors.</p>
 
 <h3>Verifying JavaScript Transformation, Polyfilling, and Bundling</h3>
 
-<p>In the terminal, there should be text indicating that <em>main.js</em> was  built. This should look like:</p>
+<p>Open one of the five JS files in /js/ and save it to trigger the JS linting process again.</p>
+
+<p>In the terminal, there should be text indicating that <em>.bableled.js</em> was  built. This should look like:</p>
 
 <pre>
   <samp>
-✨  Built in 1.27s.
-
-  ui-assets/js/main.js    40.45 KB    203ms
+⠙ Building .babeled.js...
+✨  Built in 33ms.
   </samp>
 </pre>
 
-<p>This confirms that the <a href="https://parceljs.org/">Parcel</a> bundler successfully did the following:</p>
+<p>This confirms that <a href="https://babeljs.io/">Babel</a> and the <a href="https://parceljs.org/">Parcel</a> bundler successfully did the following:</p>
 
 <ol>
-  <li>found the index JS file (entrypoint) at <em>js/index.js</em></li>
-  <li>imported and bundled the files <em>test-arrowfunction.js, test-bodytag.js, test-foreach.js, and test-selector.js</em> from the <em>/js/</em> folder</li>
-  <li>created the <em>main.js</em> bundle within <em>ui-assets/js/</em></li>
+  <li>Babel found all the files within <em>/js/</em> and concatenated them into <em>.babeled.js</em></li>
+  <li>Parcel found <em>.babeled.js</em> and created the <em>main.js</em> bundle within <em>ui-assets/js/</em></li>
 </ol>
 
-<p>Verify <a href="https://babeljs.io/">Babel</a> polyfilling by doing the following:</p>
+<p>Verify Babel and Parcel polyfilling by doing the following:</p>
 
 <ol>
   <li>Open this page in an browser that's within the Browserslist targets for this project, but does not support the <code>forEach</code> javaScript method, such as IE 11</li>
   <li>Click the list items under the <strong>Verifying Basic JavaScript Functionality</strong> section above and confirm that they are getting toggled to green one at a time when clicked, just like within a modern browser</li>
 </ol>
 
-<p>This confirms that Babel is polyfilling the missing <code>forEach</code> JavaScript functionality within <em>test-foreach.js</em>.</p>
+<p>This confirms that Babel and Parcel is polyfilling the missing <code>forEach</code> JavaScript functionality within <em>test-foreach.js</em>.</p>
 
-<p>To further understand how and what Babel is polyfilling, change the "debug" babel configuration in package.json from "false" to "true". Babel will output polyfill information for each JS file in the terminal every time it's run.</p>
+<p>To further understand how and what Babel and Parcel are  polyfilling:</p>
 
-<p>To confirm that Babel transformations are working, open ui-assets/js/main.js and look for the <code>arrowFunctionTest</code> function (about 30 lines from the bottom of the file).</p>
+<ul>
+  <li>Change the <code>debug</code> babel configuration in package.json from <code>false</code> to <code>true</code>. Babel will output polyfill information for each JS file in the terminal every time it's run.</li>
+  <li>Add the flag <code>--log-level 4</code> to the <code>parcel-watch</code> script in package.json's scripts to see what Parcel is bundling</li>
+</ul>
 
-<p>The ES2015 arrow function declared using the <code>const</code> variable in js/test-arrowfunction.js should resemble the older ES5 equivalent syntax in ui-assets/js/main.js, including the variable being declared as <code>var</code>.</p>
+<p>To confirm that Babel transformations are working, open ui-assets/js/main.js and find the <code>arrowFunctionTest</code> function (search in your text editor for <code>arrowFunctionTest</code>).</p>
+
+<p>The ES2015 arrow function declared using the <code>const</code> variable in js/test-arrowfunction.js should have been transformed to the older ES5 function syntax in ui-assets/js/main.js, using the variable declaration <code>var</code>.</p>
 
 <h2>Build Tasks</h2>
 
