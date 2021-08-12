@@ -14,13 +14,13 @@ const { spawn } = require('child_process');
 
 // Public Tasks:
 
-exports.default = series(sasswatch, criticalcss, jswatch, fractalstart, watcher);
+exports.default = series(sasswatch, jswatch, fractalstart, watcher);
 
-exports.build = series(clean, sassbuild, criticalcss, scsslint, jslint, jsbuild, fractalbuild, pushassetslocal);
+exports.build = series(clean, sassbuild, scsslint, jslint, jsbuild, fractalbuild);
 
-exports.deploy = series(clean, sassbuild, criticalcss, scsslint, jslint, jsbuild, fractalbuild, pushassetslocal, githubpages);
+exports.deploy = series(clean, sassbuild, scsslint, jslint, jsbuild, fractalbuild, githubpages);
 
-exports.test = series(settestenvironment, clean, sassbuild, criticalcss, scsslint, jslint, jsbuild, fractalbuild, makesitemap, startserver, runa11y, runpercy, stopserver, setdevenvironment);
+exports.test = series(settestenvironment, clean, sassbuild, scsslint, jslint, jsbuild, fractalbuild, makesitemap, startserver, runa11y, runpercy, stopserver, setdevenvironment);
 
 exports.updatedev = series(pushassetsdev, gitpulldev);
 
@@ -82,7 +82,7 @@ function clean(cb) {
 }
 
 function watcher(cb) {
-  watch('./scss/*.scss', parallel(series(sasswatch, criticalcss), scsslint));
+  watch('./scss/*.scss', parallel(series(sasswatch), scsslint));
   watch('./js/*.js', series(jslint));
   cb();
 }
