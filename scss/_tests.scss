@@ -1,5 +1,9 @@
 // Tests other than those in autoprefixer-tests.scss
 
+body {
+  font-family: 'Source Sans', Arial, sans-serif;
+}
+
 .test-main-scss {
   color: $color-green;
 }

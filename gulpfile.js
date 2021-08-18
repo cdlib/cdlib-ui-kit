@@ -14,13 +14,13 @@ const { spawn } = require('child_process');
 
 // Public Tasks:
 
-exports.default = series(sasswatch, jswatch, fractalstart, watcher);
+exports.default = series(copyfonts, sasswatch, jswatch, fractalstart, watcher);
 
-exports.build = series(clean, sassbuild, scsslint, jslint, jsbuild, fractalbuild);
+exports.build = series(clean, copyfonts, sassbuild, scsslint, jslint, jsbuild, fractalbuild);
 
-exports.deploy = series(clean, sassbuild, scsslint, jslint, jsbuild, fractalbuild, githubpages);
+exports.deploy = series(clean, copyfonts, sassbuild, scsslint, jslint, jsbuild, fractalbuild, githubpages);
 
-exports.test = series(settestenvironment, clean, sassbuild, scsslint, jslint, jsbuild, fractalbuild, makesitemap, startserver, runa11y, runpercy, stopserver, setdevenvironment);
+exports.test = series(settestenvironment, clean, copyfonts, sassbuild, scsslint, jslint, jsbuild, fractalbuild, makesitemap, startserver, runa11y, runpercy, stopserver, setdevenvironment);
 
 exports.updatedev = series(pushassetsdev, gitpulldev);
 
@@ -79,6 +79,13 @@ async function settestenvironment() {
 function clean(cb) {
   return del(['./dist/**', './ui-assets/**'])
   cb();
+}
+
+function copyfonts() {
+  return spawn('npm run copy-fonts', {
+    stdio: 'inherit',
+    shell: true
+  });
 }
 
 function watcher(cb) {
