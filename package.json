@@ -6,6 +6,7 @@
     "copy-config": "echo $(tput setaf 4)Copying files to cdlib-ui repo $(tput sgr 0) ... && cp -prv browserslist-stats.json fractal_subtheme fractal.js gulpfile.js package-lock.json package.json postcss.config.js ../cdlib-ui/ && echo $(tput setaf 4)All done.$(tput sgr 0)",
     "copy-install": "npm run copy-config --silent && echo $(tput setaf 4)Moving over to cdlib-ui repo $(tput sgr 0) ... && cd ../cdlib-ui/ && echo $(tput setaf 4)Installing node packages within cdlib-ui repo $(tput sgr 0) ... && npm install && echo $(tput setaf 4)Moving back to cdlib-ui-kit repo $(tput sgr 0) ... && cd ../cdlib-ui-kit/ && echo $(tput setaf 4)All done.$(tput sgr 0)",
     "copy-fonts": "copyfiles -f --error node_modules/source-sans/WOFF/TTF/* node_modules/source-sans/WOFF2/VAR/*.ttf.woff2 ui-assets/fonts",
+    "copy-assets": "copyfiles --error ui-assets/**/* dist",
     "starttestserver": "http-server ./dist/ -c-1 -s",
     "stoptestserver": "pkill http-server",
     "percy": "export PERCY_TOKEN=45278516a32a947f175c5573cbc679f3821fd327da42f41d67127536577edec8 && percy exec -- node snapshots.js",

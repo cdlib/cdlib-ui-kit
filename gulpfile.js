@@ -16,11 +16,11 @@ const { spawn } = require('child_process');
 
 exports.default = parallel(series(copyfonts, sasswatch, fractalstart, watcher), jswatch);
 
-exports.build = series(clean, copyfonts, sassbuild, scsslint, jslint, jsbuild, fractalbuild);
+exports.build = series(clean, copyfonts, sassbuild, scsslint, jslint, jsbuild, fractalbuild, copyassets);
 
-exports.deploy = series(clean, copyfonts, sassbuild, scsslint, jslint, jsbuild, fractalbuild, githubpages);
+exports.deploy = series(clean, copyfonts, sassbuild, scsslint, jslint, jsbuild, fractalbuild, copyassets, githubpages);
 
-exports.test = series(settestenvironment, clean, copyfonts, sassbuild, scsslint, jslint, jsbuild, fractalbuild, makesitemap, startserver, runa11y, runpercy, stopserver, setdevenvironment);
+exports.test = series(settestenvironment, clean, copyfonts, sassbuild, scsslint, jslint, jsbuild, fractalbuild, copyassets, makesitemap, startserver, runa11y, runpercy, stopserver, setdevenvironment);
 
 exports.updatedev = series(pushassetsdev, gitpulldev);
 
@@ -144,6 +144,15 @@ async function jswatch(cb) {
 
 async function jsbuild(cb) {
   return spawn('npm run parcel-build --silent', {
+    stdio: 'inherit',
+    shell: true
+  });
+}
+
+// Fractal build process should copy everything in /ui-assets to /dist/ui-assets, but some things are getting left out, so we do it again as a separate task:
+
+async function copyassets(cb) {
+  return spawn('npm run copy-assets', {
     stdio: 'inherit',
     shell: true
   });
