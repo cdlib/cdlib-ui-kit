@@ -14,7 +14,7 @@ const { spawn } = require('child_process');
 
 // Public Tasks:
 
-exports.default = series(copyfonts, sasswatch, jswatch, fractalstart, watcher);
+exports.default = parallel(series(copyfonts, sasswatch, fractalstart, watcher), jswatch);
 
 exports.build = series(clean, copyfonts, sassbuild, scsslint, jslint, jsbuild, fractalbuild);
 
@@ -135,15 +135,15 @@ function jslint(cb) {
   cb();
 }
 
-async function jswatch() {
-  return spawn('npm run js-watch --silent', {
+async function jswatch(cb) {
+  return spawn('npm run parcel-watch --silent', {
     stdio: 'inherit',
     shell: true
   });
 }
 
-async function jsbuild() {
-  return spawn('npm run js-build --silent', {
+async function jsbuild(cb) {
+  return spawn('npm run parcel-build --silent', {
     stdio: 'inherit',
     shell: true
   });

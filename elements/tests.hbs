@@ -110,43 +110,35 @@
 
 <p>In the file test-selector.js, the two variables <code>ignoreThisLine</code> and <code>ignoreNextLine</code> should be getting ignored by eslint due to the use of eslint ignore directives; they should not be throwing eslint errors.</p>
 
-<h3>Verifying JavaScript Transformation, Polyfilling, and Bundling</h3>
+<h3>Verifying JavaScript Bundling</h3>
 
 <p>Open one of the five JS files in /js/ and save it to trigger the JS linting process again.</p>
 
-<p>In the terminal, there should be text indicating that <em>.bableled.js</em> was  built. This should look like:</p>
+<p>In the terminal, there should be text indicating that the JavaScript was  built. This should look like:</p>
 
 <pre>
   <samp>
-⠙ Building .babeled.js...
 ✨  Built in 33ms.
   </samp>
 </pre>
 
-<p>This confirms that <a href="https://babeljs.io/">Babel</a> and the <a href="https://parceljs.org/">Parcel</a> bundler successfully did the following:</p>
+<p>This confirms that the <a href="https://parceljs.org/">Parcel</a> bundler successfully did the following:</p>
 
 <ol>
   <li>Babel found all the files within <em>/js/</em> and concatenated them into <em>.babeled.js</em></li>
   <li>Parcel found <em>.babeled.js</em> and created the <em>main.js</em> bundle within <em>ui-assets/js/</em></li>
 </ol>
 
-<p>Verify Babel and Parcel polyfilling by doing the following:</p>
+<p>Verify Parcel polyfilling by doing the following:</p>
 
 <ol>
   <li>Open this page in an browser that's within the Browserslist targets for this project, but does not support the <code>forEach</code> javaScript method, such as IE 11</li>
   <li>Click the list items under the <strong>Verifying Basic JavaScript Functionality</strong> section above and confirm that they are getting toggled to green one at a time when clicked, just like within a modern browser</li>
 </ol>
 
-<p>This confirms that Babel and Parcel is polyfilling the missing <code>forEach</code> JavaScript functionality within <em>test-foreach.js</em>.</p>
+<p>This confirms that Parcel is polyfilling the missing <code>forEach</code> JavaScript functionality within <em>test-foreach.js</em>.</p>
 
-<p>To further understand how and what Babel and Parcel are  polyfilling:</p>
-
-<ul>
-  <li>Change the <code>debug</code> babel configuration in package.json from <code>false</code> to <code>true</code>. Babel will output polyfill information for each JS file in the terminal every time it's run.</li>
-  <li>Add the flag <code>--log-level 4</code> to the <code>parcel-watch</code> script in package.json's scripts to see what Parcel is bundling</li>
-</ul>
-
-<p>To confirm that Babel transformations are working, open ui-assets/js/main.js and find the <code>arrowFunctionTest</code> function (search in your text editor for <code>arrowFunctionTest</code>).</p>
+<p>To confirm that ES6 transformations are working, open ui-assets/js/main.js and find the <code>arrowFunctionTest</code> function (search in your text editor for <code>arrowFunctionTest</code>).</p>
 
 <p>The ES2015 arrow function declared using the <code>const</code> variable in js/test-arrowfunction.js should have been transformed to the older ES5 function syntax in ui-assets/js/main.js, using the variable declaration <code>var</code>.</p>
 

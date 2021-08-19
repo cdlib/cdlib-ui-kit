@@ -1,7 +1,7 @@
-.babeled.js
 .DS_Store
 dist
 elements/_criticalcss.hbs
+.parcel-cache
 .publish
 node_modules
 ui-assets

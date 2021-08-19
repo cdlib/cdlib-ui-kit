@@ -1,0 +1,5 @@
+import 'details-element-polyfill'
+import './test-arrowfunction.js'
+import './test-bodytag.js'
+import './test-foreach.js'
+import './test-selector.js'

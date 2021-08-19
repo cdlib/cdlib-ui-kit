@@ -2,7 +2,6 @@
   "name": "cdlib-ui-kit",
   "version": "1.0.0",
   "description": "The toolkit for the cdlib-ui repository",
-  "main": "index.html",
   "scripts": {
     "copy-config": "echo $(tput setaf 4)Copying files to cdlib-ui repo $(tput sgr 0) ... && cp -prv browserslist-stats.json fractal_subtheme fractal.js gulpfile.js package-lock.json package.json postcss.config.js ../cdlib-ui/ && echo $(tput setaf 4)All done.$(tput sgr 0)",
     "copy-install": "npm run copy-config --silent && echo $(tput setaf 4)Moving over to cdlib-ui repo $(tput sgr 0) ... && cd ../cdlib-ui/ && echo $(tput setaf 4)Installing node packages within cdlib-ui repo $(tput sgr 0) ... && npm install && echo $(tput setaf 4)Moving back to cdlib-ui-kit repo $(tput sgr 0) ... && cd ../cdlib-ui-kit/ && echo $(tput setaf 4)All done.$(tput sgr 0)",
@@ -11,12 +10,8 @@
     "stoptestserver": "pkill http-server",
     "percy": "export PERCY_TOKEN=45278516a32a947f175c5573cbc679f3821fd327da42f41d67127536577edec8 && percy exec -- node snapshots.js",
     "a11y": "pa11y-ci --sitemap http://localhost:8080/sitemap.xml --threshold 1000",
-    "parcel-watch": "parcel watch .babeled.js --public-url . --out-dir ui-assets/js --out-file main.js --no-cache",
-    "parcel-build": "parcel build .babeled.js --out-dir ui-assets/js --out-file main.js --no-cache --no-source-maps",
-    "babel-watch": "babel ./js/ --watch --out-file .babeled.js --source-maps inline",
-    "babel-build": "babel ./js/ --out-file .babeled.js",
-    "js-watch": "npm run babel-watch & npm run parcel-watch",
-    "js-build": "npm run babel-build && npm run parcel-build"
+    "parcel-watch": "parcel watch js/main.js --public-url . --dist-dir ui-assets/js --no-cache",
+    "parcel-build": "parcel build js/main.js --dist-dir ui-assets/js --no-cache --no-source-maps"
   },
   "repository": {
     "type": "git",
@@ -29,15 +24,11 @@
   },
   "homepage": "https://github.com/cdlib/cdlib-ui-kit#readme",
   "devDependencies": {
-    "@babel/cli": "^7.10.1",
-    "@babel/core": "^7.10.2",
-    "@babel/preset-env": "^7.10.2",
     "@frctl/fractal": "^1.3.0",
     "@frctl/mandelbrot": "^1.4.0",
     "@percy/script": "^1.1.0",
     "autoprefixer": "^9.8.0",
     "copyfiles": "^2.4.1",
-    "core-js": "^3.6.5",
     "del": "^5.1.0",
     "eslint": "^7.2.0",
     "eslint-config-standard": "^14.1.1",
@@ -59,7 +50,7 @@
     "http-server": "^0.12.3",
     "modern-normalize": "^0.6.0",
     "pa11y-ci": "^2.3.0",
-    "parcel-bundler": "^1.12.4",
+    "parcel": "^2.0.0-rc.0",
     "postcss-import": "^12.0.1",
     "postcss-logical": "^4.0.2",
     "postcss-svg": "^3.0.0",
