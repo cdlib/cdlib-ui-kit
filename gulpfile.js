@@ -14,13 +14,13 @@ const { spawn } = require('child_process');
 
 // Public Tasks:
 
-exports.default = parallel(series(copyfonts, sasswatch, fractalstart, watcher), jswatch);
+exports.default = parallel(series(copyfonts, copyimages, sasswatch, fractalstart, watcher), jswatch);
 
-exports.build = series(clean, copyfonts, sassbuild, scsslint, jslint, jsbuild, fractalbuild, copyassets);
+exports.build = series(clean, copyfonts, copyimages, sassbuild, scsslint, jslint, jsbuild, fractalbuild, copyassets);
 
-exports.deploy = series(clean, copyfonts, sassbuild, scsslint, jslint, jsbuild, fractalbuild, copyassets, githubpages);
+exports.deploy = series(clean, copyfonts, copyimages, sassbuild, scsslint, jslint, jsbuild, fractalbuild, copyassets, githubpages);
 
-exports.test = series(settestenvironment, clean, copyfonts, sassbuild, scsslint, jslint, jsbuild, fractalbuild, copyassets, makesitemap, startserver, runa11y, runpercy, stopserver, setdevenvironment);
+exports.test = series(settestenvironment, clean, copyfonts, copyimages, sassbuild, scsslint, jslint, jsbuild, fractalbuild,  copyassets, makesitemap, startserver, runa11y, runpercy, stopserver, setdevenvironment);
 
 exports.updatedev = series(pushassetsdev, gitpulldev);
 
@@ -144,6 +144,13 @@ async function jswatch(cb) {
 
 async function jsbuild(cb) {
   return spawn('npm run parcel-build --silent', {
+    stdio: 'inherit',
+    shell: true
+  });
+}
+
+async function copyimages(cb) {
+  return spawn('npm run copy-images', {
     stdio: 'inherit',
     shell: true
   });
