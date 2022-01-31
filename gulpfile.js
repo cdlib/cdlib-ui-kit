@@ -22,6 +22,8 @@ exports.deploy = series(clean, copyfonts, copyimages, sassbuild, scsslint, jslin
 
 exports.test = series(settestenvironment, clean, copyfonts, copyimages, sassbuild, scsslint, jslint, jsbuild, fractalbuild,  copyassets, makesitemap, startserver, runa11y, runpercy, stopserver, setdevenvironment);
 
+exports.updatelocal = series(pushassetslocal);
+
 exports.updatedev = series(pushassetsdev, gitpulldev);
 
 exports.updatestage = series(pushassetsstage, gitpullstage);
@@ -205,7 +207,7 @@ function pullassetsdev() {
 }
 
 function pushassetslocal() {
-  return spawn('rsync -rvu --delete --exclude \'.DS_Store\' ./dist/ui-assets /Users/jhagedorn/Documents/cdlib-local/htdocs/wp-content/themes/cdlib', {
+  return spawn("rsync -rvu --delete --exclude \'.DS_Store\' ./dist/ui-assets ~/'Local Sites'/cdlib/app/public/wp-content/themes/cdlib", {
     stdio: 'inherit',
     shell: true
   });
