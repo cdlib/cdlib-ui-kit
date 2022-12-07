@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/cdlib/cdlib-ui-kit#readme",
   "devDependencies": {
-    "@frctl/fractal": "^1.3.0",
+    "@frctl/fractal": "^1.5.14",
     "@frctl/mandelbrot": "^1.4.0",
     "@percy/script": "^1.1.0",
     "autoprefixer": "^9.8.0",
